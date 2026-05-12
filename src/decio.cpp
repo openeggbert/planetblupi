@@ -2,6 +2,7 @@
 //
 
 #include <Windows.h>
+#include <stdint.h>
 #include "def.h"
 #include "decor.h"
 #include "misc.h"
@@ -10,21 +11,21 @@ typedef struct
 {
 	short			majRev;
 	short			minRev;
-	long			nbDecor;
-	long			lgDecor;
-	long			nbBlupi;
-	long			lgBlupi;
-	long			nbMove;
-	long			lgMove;
+	int32_t			nbDecor;
+	int32_t			lgDecor;
+	int32_t			nbBlupi;
+	int32_t			lgBlupi;
+	int32_t			nbMove;
+	int32_t			lgMove;
 	short			reserve1[100];
 	POINT			celCoin;
 	short			world;
-	long			time;
+	int32_t			time;
 	char			buttonExist[MAXBUTTON];
 	Term			term;
 	short			music;
 	short			region;
-	long			totalTime;
+	int32_t			totalTime;
 	short			skill;
 	POINT			memoPos[4];
 	short			reserve2[29];

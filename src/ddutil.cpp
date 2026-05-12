@@ -371,8 +371,15 @@ extern "C" DWORD DDColorMatch(IDirectDrawSurface *pdds, COLORREF rgb)
 
     if (hres == DD_OK)
     {
-        dw  = *(DWORD *)ddsd.lpSurface;                     // get DWORD
-        dw &= (1 << ddsd.ddpfPixelFormat.dwRGBBitCount)-1;  // mask it to bpp
+        if (ddsd.ddpfPixelFormat.dwRGBBitCount <= 24)
+        {
+            dw  = *(DWORD *)ddsd.lpSurface;                     // get DWORD
+            dw &= (1 << ddsd.ddpfPixelFormat.dwRGBBitCount)-1;  // mask it to bpp
+        }
+        else
+        {
+            dw  = *(DWORD *)ddsd.lpSurface;
+        }
         pdds->Unlock(NULL);
     }
 

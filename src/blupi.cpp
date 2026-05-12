@@ -86,7 +86,11 @@ BOOL ReadConfig(LPSTR lpCmdLine)
 	if ( pText == NULL )
 	{
 #if _DEMO
+#ifndef __linux__
 		GetCurrentDirectory(MAX_PATH, g_CDPath);
+#else
+		g_CDPath[0] = '\0';
+#endif
 		i = strlen(g_CDPath);
 		if ( i > 0 && g_CDPath[i-1] != '\\' )
 		{
