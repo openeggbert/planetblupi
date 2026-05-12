@@ -104,12 +104,12 @@ BOOL CDecor::Write(int rank, BOOL bUser, int world, int time, int total)
 
 	if ( bUser )
 	{
-		sprintf(filename, "data\\user%.3d.blp", rank);
+		sprintf(filename, "data/user%.3d.blp", rank);
 		AddUserPath(filename);
 	}
 	else
 	{
-		sprintf(filename, "data\\world%.3d.blp", rank);
+		sprintf(filename, "data/world%.3d.blp", rank);
 		if ( rank < 200 )
 		{
 			AddCDPath(filename);  // ajoute l'accčs au CD-Rom
@@ -190,12 +190,12 @@ BOOL CDecor::Read(int rank, BOOL bUser, int &world, int &time, int &total)
 
 	if ( bUser )
 	{
-		sprintf(filename, "data\\user%.3d.blp", rank);
+		sprintf(filename, "data/user%.3d.blp", rank);
 		AddUserPath(filename);
 	}
 	else
 	{
-		sprintf(filename, "data\\world%.3d.blp", rank);
+		sprintf(filename, "data/world%.3d.blp", rank);
 		if ( rank < 200 )
 		{
 			AddCDPath(filename);  // ajoute l'accčs au CD-Rom
@@ -331,12 +331,12 @@ BOOL CDecor::FileExist(int rank, BOOL bUser, int &world, int &time, int &total)
 
 	if ( bUser )
 	{
-		sprintf(filename, "data\\user%.3d.blp", rank);
+		sprintf(filename, "data/user%.3d.blp", rank);
 		AddUserPath(filename);
 	}
 	else
 	{
-		sprintf(filename, "data\\world%.3d.blp", rank);
+		sprintf(filename, "data/world%.3d.blp", rank);
 		if ( rank < 200 )
 		{
 			AddCDPath(filename);  // ajoute l'accčs au CD-Rom

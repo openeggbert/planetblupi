@@ -168,8 +168,10 @@ void AddCDPath(char *pFilename)
 	strcat(temp, pFilename);
 #else
 	if ( !bDaniel &&
-		 (strstr(pFilename, "image\\") == pFilename ||
-		  strstr(pFilename, "movie\\") == pFilename) )
+ 	 (strstr(pFilename, "image/") == pFilename ||
+ 	  strstr(pFilename, "image\\") == pFilename ||
+ 	  strstr(pFilename, "movie/") == pFilename ||
+ 	  strstr(pFilename, "movie\\") == pFilename) )
 	{
 		strcpy(temp, g_CDPath);
 		strcat(temp, "..\\");
@@ -210,14 +212,15 @@ void AddUserPath(char *pFilename)
 // 	strcpy(temp, "c:\\Plančte Blupi\\");
 // #endif
 
-	strcpy(temp, "user_data\\");
+	strcpy(temp, "user_data/");
 
 	att.nLength = sizeof(SECURITY_ATTRIBUTES);
 	att.lpSecurityDescriptor = NULL;
 	att.bInheritHandle = FALSE;
 	CreateDirectory(temp, &att);
 
-	pText = strstr(pFilename, "\\");
+	pText = strstr(pFilename, "/");
+	if ( pText == NULL )  pText = strstr(pFilename, "\\");
 	if ( pText != NULL )
 	{
 		pos = strlen(temp)+(pText-pFilename)+1;

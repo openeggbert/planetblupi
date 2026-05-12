@@ -3128,7 +3128,7 @@ BOOL CEvent::ChangePhase(UINT phase)
 			music = m_pDecor->GetMusic();
 			if ( music > 0 )
 			{
-				sprintf(filename, "sound\\music%.3d.blp", music-1);
+ 			sprintf(filename, "sound/music%.3d.blp", music-1);
 				m_pSound->PlayMusic(m_hWnd, filename);
 			}
 		}
@@ -3136,35 +3136,35 @@ BOOL CEvent::ChangePhase(UINT phase)
 
 	if ( phase == WM_PHASE_H0MOVIE )
 	{
-		strcpy(m_movieToStart, "movie\\history0.avi");
+		strcpy(m_movieToStart, "movie/history0.avi");
 		AddCDPath(m_movieToStart);
 		m_phaseAfterMovie = WM_PHASE_HISTORY0;
 	}
 
 	if ( phase == WM_PHASE_H1MOVIE )
 	{
-		strcpy(m_movieToStart, "movie\\history1.avi");
+		strcpy(m_movieToStart, "movie/history1.avi");
 		AddCDPath(m_movieToStart);
 		m_phaseAfterMovie = WM_PHASE_HISTORY1;
 	}
 
 	if ( phase == WM_PHASE_H2MOVIE )
 	{
-		strcpy(m_movieToStart, "movie\\history2.avi");
+		strcpy(m_movieToStart, "movie/history2.avi");
 		AddCDPath(m_movieToStart);
 		m_phaseAfterMovie = WM_PHASE_INFO;
 	}
 
 	if ( phase == WM_PHASE_PLAYMOVIE )
 	{
-		sprintf(m_movieToStart, "movie\\play%.3d.avi", GetPhysicalWorld());
+		sprintf(m_movieToStart, "movie/play%.3d.avi", GetPhysicalWorld());
 		AddCDPath(m_movieToStart);
 		m_phaseAfterMovie = WM_PHASE_PLAY;
 	}
 
 	if ( phase == WM_PHASE_WINMOVIE )
 	{
-		sprintf(m_movieToStart, "movie\\win%.3d.avi", GetPhysicalWorld());
+		sprintf(m_movieToStart, "movie/win%.3d.avi", GetPhysicalWorld());
 		AddCDPath(m_movieToStart);
 		m_phaseAfterMovie = WM_PHASE_WIN;
 
@@ -4208,7 +4208,7 @@ BOOL CEvent::ReadLibelle(int world, BOOL bSchool, BOOL bHelp)
 	if ( pBuffer == NULL )  goto error;
 	memset(pBuffer, 0, sizeof(char)*50000);
 
-	file = fopen("data\\enigmes.blp", "rb");
+	file = fopen("data/enigmes.blp", "rb");
 	if ( file == NULL )  goto error;
 
 	nb = fread(pBuffer, sizeof(char), 50000-1, file);
@@ -4262,7 +4262,7 @@ BOOL CEvent::WriteInfo()
 	DescInfo	info;
 	int			nb;
 
-	strcpy(filename, "data\\info.blp");
+	strcpy(filename, "data/info.blp");
 	AddUserPath(filename);
 
 	file = fopen(filename, "wb");
@@ -4304,7 +4304,7 @@ BOOL CEvent::ReadInfo()
 	DescInfo	info;
 	int			nb;
 
-	strcpy(filename, "data\\info.blp");
+	strcpy(filename, "data/info.blp");
 	AddUserPath(filename);
 
 	file = fopen(filename, "rb");
@@ -4391,8 +4391,8 @@ void CEvent::DemoRecStop()
 
 	if ( m_pDemoBuffer != NULL )
 	{
-		DeleteFile("data\\demo.blp");
-		file = fopen("data\\demo.blp", "wb");
+		DeleteFile("data/demo.blp");
+		file = fopen("data/demo.blp", "wb");
 		if ( file != NULL )
 		{
 			memset(&header, 0, sizeof(DemoHeader));
@@ -4428,7 +4428,7 @@ BOOL CEvent::DemoPlayStart()
 	if ( m_pDemoBuffer == NULL )  return FALSE;
 	memset(m_pDemoBuffer, 0, MAXDEMO*sizeof(DemoEvent));
 
-	sprintf(filename, "data\\demo%.3d.blp", m_demoNumber);
+	sprintf(filename, "data/demo%.3d.blp", m_demoNumber);
 	AddCDPath(filename);  // ajoute l'accčs au CD-Rom
 	file = fopen(filename, "rb");
 	if ( file == NULL )
@@ -5279,7 +5279,7 @@ BOOL CEvent::TreatEventBase(UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 
 		case WM_MOVIE:
-			StartMovie("movie\\essai.avi");
+  	StartMovie("movie/essai.avi");
 			ChangePhase(WM_PHASE_INIT);
 			break;
 	}

@@ -3,6 +3,10 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+#if defined(__EMSCRIPTEN__)
+#include <emscripten/emscripten.h>
+#endif
+
 #include <windows.h>
 #include <windowsx.h>
 #include <stdlib.h>
@@ -75,7 +79,7 @@ BOOL ReadConfig(LPSTR lpCmdLine)
 	char*		pText;
 	int			nb;
 
-	file = fopen("data\\config.def", "rb");
+	file = fopen("data/config.def", "rb");
 	if ( file == NULL )  return FALSE;
 	nb = fread(buffer, sizeof(char), 200-1, file);
 	buffer[nb] = 0;
@@ -850,8 +854,12 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		}
 		else
 		{
+#if defined(__EMSCRIPTEN__)
+			emscripten_sleep(0);
+#else
 			// make sure we go to sleep if we have nothing else to do
 			if ( !g_bActive )  WaitMessage();
+#endif
 		}
 	}
 

@@ -100,16 +100,21 @@ if (PLANET_BLUPI_BACKEND STREQUAL "FREEDIRECT")
 
     # Emscripten-specific link options: produce HTML output and preload game data
     # directly from the repository asset directories into the virtual filesystem.
+    # Asset layout in the virtual FS mirrors the on-disk layout so that the
+    # game's relative paths (data/, image/, sound/, movie/) resolve unchanged.
     if(EMSCRIPTEN)
         target_link_options(PLANET_BLUPI_WINDOWS PRIVATE
             -sUSE_SDL=0
             -sALLOW_MEMORY_GROWTH=1
             -sINITIAL_MEMORY=67108864
             -sASYNCIFY
-            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/gamefiles/DATA@/data_readonly"
-            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/gamefiles/IMAGE08@/image08"
-            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/gamefiles/IMAGE16@/image16"
-            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/gamefiles/SOUND@/sound"
+            # ASYNCIFY_IMPORTS: list every C function that may block (SDL_Delay
+            # is called inside GetMessageA; the others are defensive extras).
+            "-sASYNCIFY_IMPORTS=['SDL_Delay','SDL_WaitEvent','SDL_WaitEventTimeout']"
+            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/data@/data"
+            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/image@/image"
+            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/sound/english@/sound"
+            "SHELL:--preload-file ${CMAKE_SOURCE_DIR}/movie@/movie"
             -sFORCE_FILESYSTEM=1
             "-sEXPORTED_RUNTIME_METHODS=['FS','ccall','cwrap']"
             "-sEXPORTED_FUNCTIONS=['_main','_PlanetBlupi_ExportPersistentData','_PlanetBlupi_ImportPersistentData']"
