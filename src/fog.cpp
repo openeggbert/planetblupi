@@ -5,7 +5,7 @@
 #include "DECOR.H"
 
 // Cette table indique les quarts de cases contenant du
-// brouillard lorsque la valeur est à un.
+// brouillard lorsque la valeur est Å• un.
 //		0  1
 //		2  3
 static char tableFog[15*4] =
@@ -46,7 +46,7 @@ BOOL GetFogBits(int icon, char *pBits)
 	return TRUE;
 }
 
-// Retourne l'icône correspondant aux bits de brouillard.
+// Retourne l'icÃ´ne correspondant aux bits de brouillard.
 
 int GetFogIcon(char *pBits)
 {
@@ -142,7 +142,7 @@ void CDecor::BlupiPushFog(int rank)
 
 					for ( i=0 ; i<4 ; i++ )
 					{
-						nBits[i] &= cBits[i];  // "ou" visibilité
+						nBits[i] &= cBits[i];  // "ou" visibilitÃ©
 					}
 
 					m_decor[cel.x/2][cel.y/2].fog = GetFogIcon(nBits);

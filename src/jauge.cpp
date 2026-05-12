@@ -33,7 +33,7 @@ CJauge::~CJauge()
 }
 
 
-// CrÈe un nouveau bouton.
+// Cr√©e un nouveau bouton.
 
 BOOL CJauge::Create(HWND hWnd, CPixmap *pPixmap, CSound *pSound,
 					POINT pos, int type, BOOL bMinimizeRedraw)
@@ -53,7 +53,7 @@ BOOL CJauge::Create(HWND hWnd, CPixmap *pPixmap, CSound *pSound,
 	return TRUE;
 }
 
-// Dessine un bouton dans son Ètat.
+// Dessine un bouton dans son √©tat.
 
 void CJauge::Draw()
 {
@@ -63,7 +63,7 @@ void CJauge::Draw()
 	if ( m_bMinimizeRedraw && !m_bRedraw )  return;
 	m_bRedraw = FALSE;
 
-	if ( m_bHide )  // bouton cachÈ ?
+	if ( m_bHide )  // bouton cach√© ?
 	{
 		rect.left   = m_pos.x;
 		rect.right  = m_pos.x+m_dim.x;
@@ -87,7 +87,7 @@ void CJauge::Draw()
 		rect.right  = 6+part;
 		rect.top    = DIMJAUGEY*m_type;
 		rect.bottom = DIMJAUGEY*(m_type+1);
-		m_pPixmap->DrawPart(-1, CHJAUGE, m_pos, rect);  // partie colorÈe
+		m_pPixmap->DrawPart(-1, CHJAUGE, m_pos, rect);  // partie color√©e
 	}
 }
 

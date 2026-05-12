@@ -350,7 +350,7 @@ BOOL CSound::Create(HWND hWnd)
 }
 
 
-// Retourne l'état de DirectSound.
+// Retourne l'Ã©tat de DirectSound.
 
 BOOL CSound::GetEnable()
 {
@@ -358,7 +358,7 @@ BOOL CSound::GetEnable()
 }
 
 
-// Enclenche ou déclenche le son.
+// Enclenche ou dÃ©clenche le son.
 
 void CSound::SetState(BOOL bState)
 {
@@ -422,7 +422,7 @@ BOOL CSound::Cache(int channel, char *pFilename)
 	return CreateBufferFromWaveFile(channel, pFilename);
 }
 
-// Décharge un son.
+// DÃ©charge un son.
 
 void CSound::Flush(int channel)
 {
@@ -463,7 +463,7 @@ BOOL CSound::Play(int channel, int volume, int pan)
 
 // Fait entendre un son dans une image.
 // Si rank != -1, il indique le rang du blupi dont il faudra
-// éventuellement stopper le dernier son en cours !
+// Ã©ventuellement stopper le dernier son en cours !
 
 BOOL CSound::PlayImage(int channel, POINT pos, int rank)
 {
@@ -474,7 +474,7 @@ BOOL CSound::PlayImage(int channel, POINT pos, int rank)
 		stopCh = m_channelBlupi[rank];
 		if ( stopCh >= 0 && m_lpDSB[stopCh] != NULL )
 		{
-			m_lpDSB[stopCh]->Stop();  // stoppe le son précédent
+			m_lpDSB[stopCh]->Stop();  // stoppe le son prÃ©cÃ©dent
 			m_lpDSB[stopCh]->SetCurrentPosition(0);
 		}
 
@@ -627,7 +627,7 @@ BOOL CSound::IsPlayingMusic()
 	return (m_MIDIFilename[0] != 0);
 }
 
-// Adapte le volume de la musique en cours, si nécessaire.
+// Adapte le volume de la musique en cours, si nÃ©cessaire.
 
 void CSound::AdaptVolumeMusic()
 {
@@ -639,7 +639,7 @@ void CSound::AdaptVolumeMusic()
 	}
 }
 
-// Indique le nombre de suspend à sauter.
+// Indique le nombre de suspend Å• sauter.
 
 void CSound::SetSuspendSkip(int nb)
 {

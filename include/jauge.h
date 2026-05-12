@@ -29,13 +29,13 @@ protected:
 	CPixmap*	m_pPixmap;
 	CDecor*		m_pDecor;
 	CSound*		m_pSound;
-	BOOL		m_bHide;		// TRUE si bouton caché
+	BOOL		m_bHide;		// TRUE si bouton cachÃ©
 	POINT		m_pos;			// coin sup/gauche
 	POINT		m_dim;			// dimensions
 	int			m_type;
 	int			m_level;
 	BOOL		m_bMinimizeRedraw;
-	BOOL		m_bRedraw;		// TRUE -> doit être redessiné
+	BOOL		m_bRedraw;		// TRUE -> doit Ä™tre redessinÃ©
 };
 
 /////////////////////////////////////////////////////////////////////////////

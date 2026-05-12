@@ -11,7 +11,7 @@
 #define _SE				FALSE	// TRUE eGames Special Edition
 
 
-#define LXIMAGE			640		// dimensions de la fenÍtre de jeu
+#define LXIMAGE			640		// dimensions de la fenƒôtre de jeu
 #define LYIMAGE			480
 
 #define POSDRAWX		144		// surface de dessin
@@ -27,7 +27,7 @@
 #define MAXCELX			200		// nb max de cellules d'un monde
 #define MAXCELY			200
 
-#define DIMCELX			60		// dimensions d'une cellule (dÈcor)
+#define DIMCELX			60		// dimensions d'une cellule (d√©cor)
 #define DIMCELY			30
 
 #define DIMOBJX			120		// dimensions d'un objet
@@ -35,7 +35,7 @@
 
 #define DIMBLUPIX		60		// dimensions de blupi
 #define DIMBLUPIY		60
-#define SHIFTBLUPIY		5		// petit dÈcalage vers le haut
+#define SHIFTBLUPIY		5		// petit d√©calage vers le haut
 
 #define DIMBUTTONX		40		// dimensions d'un button
 #define DIMBUTTONY		40
@@ -48,10 +48,10 @@
 #define DIMSTATX		60
 #define DIMSTATY		30
 
-#define DIMTEXTX		16		// dimensions max d'un caractËre
+#define DIMTEXTX		16		// dimensions max d'un caractƒçre
 #define DIMTEXTY		16
 
-#define DIMLITTLEX		16		// dimensions max d'un petit caractËre
+#define DIMLITTLEX		16		// dimensions max d'un petit caractƒçre
 #define DIMLITTLEY		12
 
 #define CHBACK			0
@@ -99,15 +99,15 @@
 
 // Actions :
 
-#define ACTION_STOP			0		// arrÍt
-#define ACTION_STOPf		1		// arrÍt fatiguÈ
+#define ACTION_STOP			0		// arrƒôt
+#define ACTION_STOPf		1		// arrƒôt fatigu√©
 #define ACTION_MARCHE		2		// marche
-#define ACTION_MARCHEf		3		// marche fatiguÈ
+#define ACTION_MARCHEf		3		// marche fatigu√©
 #define ACTION_BUILD		4		// construit
 #define ACTION_PIOCHE		5		// pioche
-#define ACTION_ENERGY		6		// prend de l'Ènergie
-#define ACTION_TAKE			8		// fait sauter un objet sur la tÍte (est)
-#define ACTION_DEPOSE		9		// repose l'objet sur la tÍte (est)
+#define ACTION_ENERGY		6		// prend de l'√©nergie
+#define ACTION_TAKE			8		// fait sauter un objet sur la tƒôte (est)
+#define ACTION_DEPOSE		9		// repose l'objet sur la tƒôte (est)
 #define ACTION_SCIE			10		// scie du bois
 #define ACTION_BRULE		11		// blupi crame !
 #define ACTION_TCHAO		12		// blupi disparait !
@@ -118,30 +118,30 @@
 #define ACTION_SAUTE4		17		// saute par-dessus un obstacle
 #define ACTION_SAUTE5		18		// saute par-dessus un obstacle
 #define ACTION_PONT			19		// pousse un pont
-#define ACTION_MISC1		20		// divers 1 (hausse les Èpaules)
+#define ACTION_MISC1		20		// divers 1 (hausse les √©paules)
 #define ACTION_MISC2		21		// divers 2 (grat-grat)
 #define ACTION_MISC3		22		// divers 3 (yoyo)
-#define ACTION_MISC1f		23		// divers 1 fatiguÈ (bof-bof)
+#define ACTION_MISC1f		23		// divers 1 fatigu√© (bof-bof)
 #define ACTION_GLISSE		24		// glisse en marchant
 #define ACTION_BOIT			25		// blupi boit
 #define ACTION_LABO			26		// blupi travaille dans son laboratoire
-#define ACTION_DYNAMITE		27		// blupi fait pÈter la dynamite
+#define ACTION_DYNAMITE		27		// blupi fait p√©ter la dynamite
 #define ACTION_DELAY		28		// blupi attend un frame
 #define ACTION_CUEILLE1		29		// blupi cueille des fleurs
 #define ACTION_CUEILLE2		30		// blupi cueille des fleurs
 #define ACTION_MECHE		31		// blupi se bouche les oreilles
-#define ACTION_STOPb		32		// arrÍt en bateau
+#define ACTION_STOPb		32		// arrƒôt en bateau
 #define ACTION_MARCHEb		33		// avance en bateau
-#define ACTION_STOPj		34		// arrÍt en jeep
+#define ACTION_STOPj		34		// arrƒôt en jeep
 #define ACTION_MARCHEj		35		// avance en jeep
-#define ACTION_ELECTRO		36		// blupi ÈlectrocutÈ
+#define ACTION_ELECTRO		36		// blupi √©lectrocut√©
 #define ACTION_GRILLE1		37		// blupi grille (phase 1)
 #define ACTION_GRILLE2		38		// blupi grille (phase 2)
 #define ACTION_GRILLE3		39		// blupi grille (phase 3)
 #define ACTION_MISC4		40		// divers 4 (ferme les yeux)
 #define ACTION_CONTENT		41		// blupi est content
 #define ACTION_ARROSE		42		// blupi arrose
-#define ACTION_BECHE		43		// blupi bËche
+#define ACTION_BECHE		43		// blupi bƒçche
 #define ACTION_CUEILLE3		44		// blupi cueille des fleurs
 #define ACTION_BUILDBREF	45		// construit
 #define ACTION_BUILDSEC		46		// construit
@@ -149,53 +149,53 @@
 #define ACTION_BUILDPIERRE	48		// construit
 #define ACTION_PIOCHEPIERRE	49		// pioche
 #define ACTION_PIOCHESOURD	50		// pioche
-#define ACTION_MISC5		51		// divers 5 (ohÈ)
-#define ACTION_TELEPORTE1	52		// tÈlÈporte
-#define ACTION_TELEPORTE2	53		// tÈlÈporte
-#define ACTION_TELEPORTE3	54		// tÈlÈporte
-#define ACTION_STOPa		55		// arrÍt armure
+#define ACTION_MISC5		51		// divers 5 (oh√©)
+#define ACTION_TELEPORTE1	52		// t√©l√©porte
+#define ACTION_TELEPORTE2	53		// t√©l√©porte
+#define ACTION_TELEPORTE3	54		// t√©l√©porte
+#define ACTION_STOPa		55		// arrƒôt armure
 #define ACTION_MARCHEa		56		// marche armure
 #define ACTION_ARMUREOPEN	57		// ouvre armure
 #define ACTION_ARMURECLOSE	58		// ferme armure
 #define ACTION_SAUTE1		59		// saute dans la jeep
 #define ACTION_MISC6		60		// divers 6 (diabolo)
 
-#define ACTION_A_STOP		100		// araignÈe: arrÍt
-#define ACTION_A_MARCHE		101		// araignÈe: marche
-#define ACTION_A_SAUT		102		// araignÈe: saute
-#define ACTION_A_GRILLE		103		// araignÈe: grille dans rayon
-#define ACTION_A_POISON		105		// araignÈe: empoisonÈe
-#define ACTION_A_MORT1		106		// araignÈe: meurt
-#define ACTION_A_MORT2		107		// araignÈe: meurt
-#define ACTION_A_MORT3		108		// araignÈe: meurt
+#define ACTION_A_STOP		100		// araign√©e: arrƒôt
+#define ACTION_A_MARCHE		101		// araign√©e: marche
+#define ACTION_A_SAUT		102		// araign√©e: saute
+#define ACTION_A_GRILLE		103		// araign√©e: grille dans rayon
+#define ACTION_A_POISON		105		// araign√©e: empoison√©e
+#define ACTION_A_MORT1		106		// araign√©e: meurt
+#define ACTION_A_MORT2		107		// araign√©e: meurt
+#define ACTION_A_MORT3		108		// araign√©e: meurt
 
-#define ACTION_V_STOP		200		// virus: arrÍt
+#define ACTION_V_STOP		200		// virus: arrƒôt
 #define ACTION_V_MARCHE		201		// virus: marche
 #define ACTION_V_GRILLE		202		// virus: grille dans rayon
 
-#define ACTION_T_STOP		300		// tracks: arrÍt
+#define ACTION_T_STOP		300		// tracks: arrƒôt
 #define ACTION_T_MARCHE		301		// tracks: marche
-#define ACTION_T_ECRASE		302		// tracks: Ècrase un objet
+#define ACTION_T_ECRASE		302		// tracks: √©crase un objet
 
-#define ACTION_R_STOP		400		// robot: arrÍt
+#define ACTION_R_STOP		400		// robot: arrƒôt
 #define ACTION_R_MARCHE		401		// robot: marche
 #define ACTION_R_APLAT		402		// robot: applatit
 #define ACTION_R_BUILD		403		// robot: construit
 #define ACTION_R_DELAY		404		// robot: construit
 #define ACTION_R_CHARGE		405		// robot: recharge
-#define ACTION_R_ECRASE		406		// robot: Ècrase un objet
+#define ACTION_R_ECRASE		406		// robot: √©crase un objet
 
-#define ACTION_B_STOP		500		// bombe: arrÍt
+#define ACTION_B_STOP		500		// bombe: arrƒôt
 #define ACTION_B_MARCHE		501		// bombe: marche
 
-#define ACTION_D_DELAY		600		// dÈtonnateur: attend
+#define ACTION_D_DELAY		600		// d√©tonnateur: attend
 
-#define ACTION_E_STOP		700		// Èlectro: arrÍt
-#define ACTION_E_MARCHE		701		// Èlectro: marche
-#define ACTION_E_DEBUT		702		// Èlectro: dÈbute
-#define ACTION_E_RAYON		703		// Èlectro: rayonne
+#define ACTION_E_STOP		700		// √©lectro: arrƒôt
+#define ACTION_E_MARCHE		701		// √©lectro: marche
+#define ACTION_E_DEBUT		702		// √©lectro: d√©bute
+#define ACTION_E_RAYON		703		// √©lectro: rayonne
 
-#define ACTION_D_STOP		800		// disciple: arrÍt
+#define ACTION_D_STOP		800		// disciple: arrƒôt
 #define ACTION_D_MARCHE		801		// disciple: marche
 #define ACTION_D_BUILD		802		// disciple: construit
 #define ACTION_D_PIOCHE		803		// disciple: pioche
@@ -205,7 +205,7 @@
 #define ACTION_D_CUEILLE2	807		// disciple: cueille des fleurs
 #define ACTION_D_MECHE		808		// disciple: se bouche les oreilles
 #define ACTION_D_ARROSE		809		// disciple: arrose
-#define ACTION_D_BECHE		810		// disciple: bËche
+#define ACTION_D_BECHE		810		// disciple: bƒçche
 
 
 // Sons :
@@ -601,16 +601,16 @@
 
 typedef struct
 {
-	short	bHachBlupi;		// blupi sur dalle hachurÈe
-	short	bHachPlanche;	// planches sur dalle hachurÈe
-	short	bStopFire;		// feu Èteint
-	short	nbMinBlupi;		// nb de blupi nÈcessaires
-	short	nbMaxBlupi;		// nb de blupi nÈcessaires
-	short	bHomeBlupi;		// blupi ‡ la maison
+	short	bHachBlupi;		// blupi sur dalle hachur√©e
+	short	bHachPlanche;	// planches sur dalle hachur√©e
+	short	bStopFire;		// feu √©teint
+	short	nbMinBlupi;		// nb de blupi n√©cessaires
+	short	nbMaxBlupi;		// nb de blupi n√©cessaires
+	short	bHomeBlupi;		// blupi ≈ï la maison
 	short	bKillRobots;	// plus d'ennemis
-	short	bHachTomate;	// tomates sur dalle hachurÈe
-	short	bHachMetal;		// mÈtal sur dalle hachurÈe
-	short	bHachRobot;		// robot sur dalle hachurÈe
+	short	bHachTomate;	// tomates sur dalle hachur√©e
+	short	bHachMetal;		// m√©tal sur dalle hachur√©e
+	short	bHachRobot;		// robot sur dalle hachur√©e
 	short	reserve[14];
 }
 Term;

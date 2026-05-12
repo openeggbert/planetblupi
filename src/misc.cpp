@@ -91,14 +91,14 @@ POINT ConvLongToPos(LPARAM lParam)
 }
 
 
-// RÈinitialise le gÈnÈrateur alÈatoire.
+// R√©initialise le g√©n√©rateur al√©atoire.
 
 void InitRandom()
 {
 	srand(1);
 }
 
-// Retourne un nombre alÈatoire compris entre
+// Retourne un nombre al√©atoire compris entre
 // deux bornes (inclues).
 
 int Random(int min, int max)
@@ -207,7 +207,7 @@ void AddUserPath(char *pFilename)
 	strcpy(temp, "c:\\Planet Blupi SE\\");
 #endif
 #else
-	strcpy(temp, "c:\\PlanËte Blupi\\");
+	strcpy(temp, "c:\\Planƒçte Blupi\\");
 #endif
 
 	att.nLength = sizeof(SECURITY_ATTRIBUTES);

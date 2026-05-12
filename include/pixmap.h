@@ -101,7 +101,7 @@ protected:
 
 	char					m_filename[MAXIMAGE][20];
 	POINT					m_totalDim[MAXIMAGE];	// dimensions totale image
-	POINT					m_iconDim[MAXIMAGE];	// dimensions d'une icône
+	POINT					m_iconDim[MAXIMAGE];	// dimensions d'une icÃ´ne
 	DDBLTFX					m_DDbltfx;
 };
 

@@ -12,7 +12,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 
-// Retourne l'offset pour un caractËre donnÈ.
+// Retourne l'offset pour un caractƒçre donn√©.
 
 int GetOffset(char c)
 {
@@ -31,12 +31,12 @@ int GetOffset(char c)
 			return 15+i;
 		}
 	}
-	if ( c<0 || c>128 )  return 1;  // carrÈ
+	if ( c<0 || c>128 )  return 1;  // carr√©
 
 	return c;
 }
 
-// Retourne la longueur d'un caractËre.
+// Retourne la longueur d'un caractƒçre.
 
 int GetCharWidth(char c, int font)
 {
@@ -103,7 +103,7 @@ void DrawText(CPixmap *pPixmap, POINT pos, char *pText, int font)
 	}
 }
 
-// Affiche un texte penchÈ.
+// Affiche un texte pench√©.
 
 void DrawTextPente(CPixmap *pPixmap, POINT pos, char *pText,
 				   int pente, int font)
@@ -125,8 +125,8 @@ void DrawTextPente(CPixmap *pPixmap, POINT pos, char *pText,
 	}
 }
 
-// Affiche un pavÈ de texte.
-// Une ligne vide est affichÈe avec un demi interligne !
+// Affiche un pav√© de texte.
+// Une ligne vide est affich√©e avec un demi interligne !
 // Si part != -1, n'affiche que les lignes qui commencent
 // par "n|", avec n=part.
 
@@ -177,13 +177,13 @@ void DrawTextRect(CPixmap *pPixmap, POINT pos, char *pText,
 		}
 		else
 		{
-			pos.y += itl;  // passe ‡ la ligne suivante
+			pos.y += itl;  // passe ≈ï la ligne suivante
 		}
 	}
 }
 
-// Affiche un texte centrÈ pouvant Èventuellement
-// contenir plusieurs lignes sÈparÈes par des '\n'.
+// Affiche un texte centr√© pouvant √©ventuellement
+// contenir plusieurs lignes s√©par√©es par des '\n'.
 
 void DrawTextCenter(CPixmap *pPixmap, POINT pos, char *pText, int font)
 {
@@ -217,7 +217,7 @@ void DrawTextCenter(CPixmap *pPixmap, POINT pos, char *pText, int font)
 		}
 		else
 		{
-			pos.y += itl;  // passe ‡ la ligne suivante
+			pos.y += itl;  // passe ≈ï la ligne suivante
 		}
 	}
 }
@@ -262,7 +262,7 @@ int GetTextHeight(char *pText, int font, int part)
 		}
 		else
 		{
-			h += itl;  // passe ‡ la ligne suivante
+			h += itl;  // passe ≈ï la ligne suivante
 		}
 	}
 

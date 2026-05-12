@@ -33,26 +33,26 @@ DescFile;
 
 typedef struct
 {
-	BOOL	bExist;			// TRUE -> utilisÈ
-	BOOL	bHili;			// TRUE -> sÈlectionnÈ
+	BOOL	bExist;			// TRUE -> utilis√©
+	BOOL	bHili;			// TRUE -> s√©lectionn√©
 
 	short	perso;			// personnage, voir (*)
 
 	short	goalAction;		// action (long terme)
 	short	goalPhase;		// phase (long terme)
-	POINT	goalCel;		// cellule visÈe (long terme)
+	POINT	goalCel;		// cellule vis√©e (long terme)
 	POINT	passCel;		// cellule tranversante
 
-	short	energy;			// Ènergie restante
+	short	energy;			// √©nergie restante
 
 	POINT	cel;			// cellule actuelle
 	POINT	destCel;		// cellule destination
 	short	action;			// action en cours
 	short	aDirect;		// direction actuelle
-	short	sDirect;		// direction souhaitÈe
+	short	sDirect;		// direction souhait√©e
 
-	POINT	pos;			// position relative ‡ partir de la cellule
-	short	posZ;			// dÈplacement z
+	POINT	pos;			// position relative ≈ï partir de la cellule
+	short	posZ;			// d√©placement z
 	short	channel;
 	short	lastIcon;
 	short	icon;
@@ -61,12 +61,12 @@ typedef struct
 	short	interrupt;		// 0=prioritaire, 1=normal, 2=misc
 	short	clipLeft;
 
-	int		nbUsed;			// nb de points dÈj‡ visitÈs
+	int		nbUsed;			// nb de points d√©j≈ï visit√©s
 	char	nextRankUsed;
 	POINT	posUsed[MAXUSED];
 	char	rankUsed[MAXUSED];
 
-	short	takeChannel;	// objet transportÈ
+	short	takeChannel;	// objet transport√©
 	short	takeIcon;
 
 	POINT	fix;			// point fixe (cultive, pont)
@@ -74,15 +74,15 @@ typedef struct
 	short	jaugePhase;
 	short	jaugeMax;
 	short	stop;			// 1 -> devra stopper
-	short	bArrow;			// TRUE -> flËche en dessus de blupi
-	short	bRepeat;		// TRUE -> rÈpËte l'action
+	short	bArrow;			// TRUE -> flƒçche en dessus de blupi
+	short	bRepeat;		// TRUE -> r√©pƒçte l'action
 	short	nLoop;			// nb de boucles pour GOAL_OTHERLOOP
 	short	cLoop;			// boucle en cours
-	short	vIcon;			// icÙne variable
-	POINT	goalHili;		// but visÈ
+	short	vIcon;			// ic√¥ne variable
+	POINT	goalHili;		// but vis√©
 	short	bMalade;		// TRUE -> blupi malade
-	short	bCache;			// TRUE -> cachÈ (pas dessinÈ)
-	short	vehicule;		// vÈhicule utilisÈ par blupi, voir (**)
+	short	bCache;			// TRUE -> cach√© (pas dessin√©)
+	short	vehicule;		// v√©hicule utilis√© par blupi, voir (**)
 	char	busyCount;
 	char	busyDelay;
 	char	clicCount;
@@ -92,7 +92,7 @@ typedef struct
 OldBlupi;
 
 
-// Sauve le dÈcor sur disque.
+// Sauve le d√©cor sur disque.
 
 BOOL CDecor::Write(int rank, BOOL bUser, int world, int time, int total)
 {
@@ -111,7 +111,7 @@ BOOL CDecor::Write(int rank, BOOL bUser, int world, int time, int total)
 		sprintf(filename, "data\\world%.3d.blp", rank);
 		if ( rank < 200 )
 		{
-			AddCDPath(filename);  // ajoute l'accËs au CD-Rom
+			AddCDPath(filename);  // ajoute l'accƒçs au CD-Rom
 		}
 	}
 
@@ -174,7 +174,7 @@ BOOL CDecor::Write(int rank, BOOL bUser, int world, int time, int total)
 	return FALSE;
 }
 
-// Lit le dÈcor sur disque.
+// Lit le d√©cor sur disque.
 
 BOOL CDecor::Read(int rank, BOOL bUser, int &world, int &time, int &total)
 {
@@ -197,7 +197,7 @@ BOOL CDecor::Read(int rank, BOOL bUser, int &world, int &time, int &total)
 		sprintf(filename, "data\\world%.3d.blp", rank);
 		if ( rank < 200 )
 		{
-			AddCDPath(filename);  // ajoute l'accËs au CD-Rom
+			AddCDPath(filename);  // ajoute l'accƒçs au CD-Rom
 		}
 	}
 
@@ -304,7 +304,7 @@ BOOL CDecor::Read(int rank, BOOL bUser, int &world, int &time, int &total)
 		InitDrapeau();
 	}
 
-	BlupiDeselect();  // dÈsÈlectionne tous les blupi
+	BlupiDeselect();  // d√©s√©lectionne tous les blupi
 
 	free(pBuffer);
 	fclose(file);
@@ -314,7 +314,7 @@ BOOL CDecor::Read(int rank, BOOL bUser, int &world, int &time, int &total)
 	if ( pBuffer != NULL )  free(pBuffer);
 	if ( file    != NULL )  fclose(file);
 
-	Flush();  // initialise un dÈcor neutre
+	Flush();  // initialise un d√©cor neutre
 	return FALSE;
 }
 
@@ -338,7 +338,7 @@ BOOL CDecor::FileExist(int rank, BOOL bUser, int &world, int &time, int &total)
 		sprintf(filename, "data\\world%.3d.blp", rank);
 		if ( rank < 200 )
 		{
-			AddCDPath(filename);  // ajoute l'accËs au CD-Rom
+			AddCDPath(filename);  // ajoute l'accƒçs au CD-Rom
 		}
 	}
 
@@ -392,7 +392,7 @@ BOOL CDecor::FileExist(int rank, BOOL bUser, int &world, int &time, int &total)
 
 #define MARG	18
 
-// Initialise un dÈcor neutre.
+// Initialise un d√©cor neutre.
 
 void CDecor::Flush()
 {

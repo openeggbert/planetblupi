@@ -26,9 +26,9 @@
 typedef struct
 {
 	short		bExist;
-	short		perso;		// -1=objet, -2=feu, -3=flËche
-	short		firstIcon;	// nÈgatif si sol
-	short		lastIcon;	// nÈgatif si sol
+	short		perso;		// -1=objet, -2=feu, -3=flƒçche
+	short		firstIcon;	// n√©gatif si sol
+	short		lastIcon;	// n√©gatif si sol
 	short		drawIcon;
 	short		bBigIcon;
 	short		text;
@@ -51,7 +51,7 @@ static Statistic table_statistic[] =
 	},
 	{				// STATBLUPIf = 1
 		TRUE,
-		0,			// blupi fatiguÈ
+		0,			// blupi fatigu√©
 		0,0,		// 
 		13,
 		FALSE,
@@ -60,7 +60,7 @@ static Statistic table_statistic[] =
 	},
 	{				// STATBLUPI = 2
 		TRUE,
-		0,			// blupi Ènergique
+		0,			// blupi √©nergique
 		0,0,		// 
 		14,
 		FALSE,
@@ -106,7 +106,7 @@ static Statistic table_statistic[] =
 	{				// 7
 		TRUE,
 		-1,			// objet
-		93,93,		// piËge
+		93,93,		// piƒçge
 		70,
 		FALSE,
 		TX_OBJ_PIEGE,
@@ -241,7 +241,7 @@ static Statistic table_statistic[] =
 	{				// 22
 		TRUE,
 		-1,			// objet
-		-80,-84,	// tÈlÈporteur
+		-80,-84,	// t√©l√©porteur
 		101,
 		FALSE,
 		TX_OBJ_TELEPORTE,
@@ -321,7 +321,7 @@ static Statistic table_statistic[] =
 	},
 	{				// STATARAIGNEE = 31
 		TRUE,
-		1,			// araignÈe
+		1,			// araign√©e
 		0,0,		// 
 		15,
 		FALSE,
@@ -339,7 +339,7 @@ static Statistic table_statistic[] =
 	},
 	{				// STATELECTRO = 33
 		TRUE,
-		7,			// Èlectro
+		7,			// √©lectro
 		0,0,		// 
 		75,
 		FALSE,
@@ -359,7 +359,7 @@ static Statistic table_statistic[] =
 };
 
 
-// Retourne la statistique correspondant ‡ un rang donnÈ.
+// Retourne la statistique correspondant ≈ï un rang donn√©.
 
 Statistic* StatisticGet(int rank)
 {
@@ -386,7 +386,7 @@ Statistic* StatisticGet(int rank)
 
 
 
-// RÈinitialise les statistiques.
+// R√©initialise les statistiques.
 
 void CDecor::StatisticInit()
 {
@@ -409,7 +409,7 @@ void CDecor::StatisticInit()
 }
 
 
-// Met ‡ jour tous les compteurs des statistiques.
+// Met ≈ï jour tous les compteurs des statistiques.
 
 void CDecor::StatisticUpdate()
 {
@@ -458,7 +458,7 @@ void CDecor::StatisticUpdate()
 				x = (m_blupi[rank].cel.x/2)*2;
 				y = (m_blupi[rank].cel.y/2)*2;
 				if ( m_decor[x/2][y/2].floorChannel == CHFLOOR &&
-					 m_decor[x/2][y/2].floorIcon    == 17 )  // dalle hachurÈe ?
+					 m_decor[x/2][y/2].floorIcon    == 17 )  // dalle hachur√©e ?
 				{
 					m_nbStatHachBlupi ++;
 				}
@@ -479,7 +479,7 @@ void CDecor::StatisticUpdate()
 				x = (m_blupi[rank].cel.x/2)*2;
 				y = (m_blupi[rank].cel.y/2)*2;
 				if ( m_decor[x/2][y/2].floorChannel == CHFLOOR &&
-					 m_decor[x/2][y/2].floorIcon    == 17 )  // dalle hachurÈe ?
+					 m_decor[x/2][y/2].floorIcon    == 17 )  // dalle hachur√©e ?
 				{
 					m_nbStatHachRobot ++;
 				}
@@ -492,7 +492,7 @@ void CDecor::StatisticUpdate()
 					m_nbStatRobots ++;
 				}
 			}
-			if ( m_blupi[rank].perso == 1 )  // araignÈe ?
+			if ( m_blupi[rank].perso == 1 )  // araign√©e ?
 			{
 				table_statistic[STATARAIGNEE].nb ++;
 				if ( !m_term.bHachRobot )  // pas robot sur hachures ?
@@ -512,7 +512,7 @@ void CDecor::StatisticUpdate()
 					m_nbStatRobots ++;
 				}
 			}
-			if ( m_blupi[rank].perso == 7 )  // Èlectro ?
+			if ( m_blupi[rank].perso == 7 )  // √©lectro ?
 			{
 				table_statistic[STATELECTRO].nb ++;
 				if ( !m_term.bHachRobot )  // pas robot sur hachures ?
@@ -529,7 +529,7 @@ void CDecor::StatisticUpdate()
 		{
 			bHach = FALSE;
 			if ( m_decor[x/2][y/2].floorChannel == CHFLOOR &&
-				 m_decor[x/2][y/2].floorIcon    == 17 )  // dalle hachurÈe ?
+				 m_decor[x/2][y/2].floorIcon    == 17 )  // dalle hachur√©e ?
 			{
 				bHach = TRUE;
 				m_nbStatHach ++;
@@ -567,7 +567,7 @@ void CDecor::StatisticUpdate()
 				{
 					m_nbStatHachTomate ++;
 				}
-				if ( icon == 14 && bHach )  // mÈtal ?
+				if ( icon == 14 && bHach )  // m√©tal ?
 				{
 					m_nbStatHachMetal ++;
 				}
@@ -578,7 +578,7 @@ void CDecor::StatisticUpdate()
 				icon = m_decor[x/2][y/2].floorIcon;
 
 				if ( (icon >= 52 && icon <= 56) ||  // couveuse ?
-					 (icon >= 80 && icon <= 84) )   // tÈlÈporteur ?
+					 (icon >= 80 && icon <= 84) )   // t√©l√©porteur ?
 				{
 					pStatistic = table_statistic;
 					while ( pStatistic->bExist )
@@ -622,7 +622,7 @@ void CDecor::StatisticUpdate()
 	}
 	else
 	{
-		// nb <- nb de pages nÈcessaires
+		// nb <- nb de pages n√©cessaires
 		nb = (m_statNb+STATNB-5)/(STATNB-2);
 
 		m_bStatUp   = TRUE;
@@ -638,7 +638,7 @@ void CDecor::StatisticUpdate()
 		}
 	}
 
-	m_bStatRecalc = FALSE;  // c'est calculÈ
+	m_bStatRecalc = FALSE;  // c'est calcul√©
 	m_bStatRedraw = TRUE;   // faudra tout redessiner
 }
 
@@ -700,28 +700,28 @@ void CDecor::StatisticDraw()
 
 		if ( rank == 0 && m_bStatUp )
 		{
-			icon = 6+66;  // flËche up
-			if ( rank == m_statHili )  // statistique survolÈe ?
+			icon = 6+66;  // flƒçche up
+			if ( rank == m_statHili )  // statistique survol√©e ?
 			{
 				icon ++;
 			}
 			pos.x -= 3;
 			pos.y -= 5;
 			if ( pStatistic->drawIcon == 68 )  pos.x += 26;
-			m_pPixmap->DrawIcon(-1, CHBUTTON, icon, pos);  // flËche up
+			m_pPixmap->DrawIcon(-1, CHBUTTON, icon, pos);  // flƒçche up
 			continue;
 		}
 
 		if ( rank == STATNB-1 && m_bStatDown )
 		{
-			icon = 6+68;  // flËche down
-			if ( rank == m_statHili )  // statistique survolÈe ?
+			icon = 6+68;  // flƒçche down
+			if ( rank == m_statHili )  // statistique survol√©e ?
 			{
 				icon ++;
 			}
 			pos.x += 23;
 			pos.y -= 5;
-			m_pPixmap->DrawIcon(-1, CHBUTTON, icon, pos);  // flËche down
+			m_pPixmap->DrawIcon(-1, CHBUTTON, icon, pos);  // flƒçche down
 			continue;
 		}
 
@@ -729,7 +729,7 @@ void CDecor::StatisticDraw()
 
 		icon = 6+pStatistic->drawIcon;
 
-		if ( rank == m_statHili )  // statistique survolÈe ?
+		if ( rank == m_statHili )  // statistique survol√©e ?
 		{
 			m_pPixmap->DrawIconDemi(-1, CHBLUPI, ICON_HILI_STAT, pos);
 			textRes = pStatistic->text;
@@ -764,7 +764,7 @@ void CDecor::StatisticDraw()
 		if ( m_statHili == 102 )  textRes = TX_BUTTON_PLAY_WRITE;
 	}
 
-	// Dessine le nom de la statistique survolÈe.
+	// Dessine le nom de la statistique survol√©e.
 	pos.x = 0;
 	pos.y = 404;
 	rect.left   = pos.x;
@@ -781,10 +781,10 @@ void CDecor::StatisticDraw()
 		DrawText(m_pPixmap, pos, text);
 	}
 
-	m_bStatRedraw = FALSE;  // dessin plus nÈcessaire
+	m_bStatRedraw = FALSE;  // dessin plus n√©cessaire
 }
 
-// GÈnËre les statistiques.
+// G√©nƒçre les statistiques.
 
 void CDecor::GenerateStatictic()
 {
@@ -792,7 +792,7 @@ void CDecor::GenerateStatictic()
 
 	if ( m_bStatRecalc || m_phase%20 == 10 )
 	{
-		StatisticUpdate();  // met ‡ jour les compteurs
+		StatisticUpdate();  // met ≈ï jour les compteurs
 	}
 
 	if ( m_bStatRedraw )
@@ -802,7 +802,7 @@ void CDecor::GenerateStatictic()
 }
 
 
-// Bouton pressÈ dans les statistiques.
+// Bouton press√© dans les statistiques.
 
 BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 {
@@ -815,7 +815,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 	hili = StatisticDetect(pos);
 	if ( hili < 0 )  return FALSE;
 
-	if ( m_bStatUp && hili == 0 )  // flËche up ?
+	if ( m_bStatUp && hili == 0 )  // flƒçche up ?
 	{
 		m_statFirst -= STATNB-2;
 		if ( m_statFirst < STATNB-1 )
@@ -829,7 +829,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 		return TRUE;
 	}
 
-	if ( m_bStatDown && hili == STATNB-1 )  // flËche down ?
+	if ( m_bStatDown && hili == STATNB-1 )  // flƒçche down ?
 	{
 		if ( m_statFirst == 0 )
 		{
@@ -854,7 +854,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 	show = pStatistic->lastShow % pStatistic->nb;
 	pStatistic->lastShow ++;
 
-	if ( pStatistic->perso >= 0 )  // blupi/araignÈe ?
+	if ( pStatistic->perso >= 0 )  // blupi/araign√©e ?
 	{
 		for ( rank=0 ; rank<MAXBLUPI ; rank++ )
 		{
@@ -868,9 +868,9 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 					  pStatistic->drawIcon == 76) ||  // malade ?
 					 (!m_blupi[rank].bMalade &&
 					  m_blupi[rank].energy <= MAXENERGY/4 &&
-					  pStatistic->drawIcon == 13) ||  // fatiguÈ ?
+					  pStatistic->drawIcon == 13) ||  // fatigu√© ?
 					 (m_blupi[rank].energy > MAXENERGY/4 &&
-					  pStatistic->drawIcon == 14) )  // Ènergique ?
+					  pStatistic->drawIcon == 14) )  // √©nergique ?
 				{
 					if ( show == 0 )
 					{
@@ -879,7 +879,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 						{
 							BlupiDeselect();
 							m_blupi[rank].bHili = TRUE;
-							m_rankBlupiHili = rank;  // sÈlectionne
+							m_rankBlupiHili = rank;  // s√©lectionne
 							m_nbBlupiHili = 1;
 						}
 						BlupiSetArrow(rank, TRUE);
@@ -911,7 +911,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 							cel = GetCel(x,y);
 							if ( pStatistic->bBigIcon )
 							{
-								// FlËche plus haute.
+								// Flƒçche plus haute.
 								m_celArrow = GetCel(cel,-2,-2);
 							}
 							else
@@ -946,7 +946,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 							cel = GetCel(x,y);
 							if ( pStatistic->bBigIcon )
 							{
-								// FlËche plus haute.
+								// Flƒçche plus haute.
 								m_celArrow = GetCel(cel,-2,-2);
 							}
 							else
@@ -991,7 +991,7 @@ BOOL CDecor::StatisticDown(POINT pos, int fwKeys)
 	return TRUE;
 }
 
-// Souris dÈplacÈe dans les statistiques.
+// Souris d√©plac√©e dans les statistiques.
 
 BOOL CDecor::StatisticMove(POINT pos, int fwKeys)
 {
@@ -999,7 +999,7 @@ BOOL CDecor::StatisticMove(POINT pos, int fwKeys)
 
 	rank = StatisticDetect(pos);
 
-	if ( rank != m_statHili )  // autre mise en Èvidence ?
+	if ( rank != m_statHili )  // autre mise en √©vidence ?
 	{
 		m_statHili = rank;
 		m_bStatRedraw = TRUE;  // faudra tout redessiner
@@ -1008,14 +1008,14 @@ BOOL CDecor::StatisticMove(POINT pos, int fwKeys)
 	return FALSE;
 }
 
-// Bouton rel‚chÈ dans les statistiques.
+// Bouton rel√¢ch√© dans les statistiques.
 
 BOOL CDecor::StatisticUp(POINT pos, int fwKeys)
 {
 	return FALSE;
 }
 
-// DÈtecte dans quelle statistique est la souris.
+// D√©tecte dans quelle statistique est la souris.
 
 int CDecor::StatisticDetect(POINT pos)
 {

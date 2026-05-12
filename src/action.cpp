@@ -1366,7 +1366,7 @@ static DescAction action_table[] =
 		{0},
 	},
 	{
-		ACTION_MISC1,		// hausse les épaules
+		ACTION_MISC1,		// hausse les Ã©paules
 		CHBLUPI,
 		{
 			{1, 140},	// e
@@ -1466,7 +1466,7 @@ static DescAction action_table[] =
 		{0},
 	},
 	{
-		ACTION_MISC5,		// ohé
+		ACTION_MISC5,		// ohÃ©
 		CHBLUPI,
 		{
 			{8, 110,110,111,111,110,110,112,112},
@@ -1845,7 +1845,7 @@ static DescAction action_table[] =
 		{0},
 	},
 
-	// Araignée :
+	// AraignÃ©e :
 
 	{
 		ACTION_A_STOP,
@@ -2444,7 +2444,7 @@ static DescAction action_table[] =
 			 -1,-1,SOUND_B_SAUT,-1,-1,-1,-1,-1,-1,-1},
 	},
 
-	// Détonnateur de mine.
+	// DÃ©tonnateur de mine.
 
 	{
 		ACTION_D_DELAY,
@@ -2569,7 +2569,7 @@ static DescAction action_table[] =
 
 
 // Calcule l'action suivante.
-// Retourne FALSE lorsque l'action est terminée.
+// Retourne FALSE lorsque l'action est terminÃ©e.
 
 BOOL Action(short action, short direct,
 			short &phase, short &step,
@@ -2657,7 +2657,7 @@ static short rotate_table[] =
 	-1
 };
 
-// Tourne une icône dans une direction donnée.
+// Tourne une icÃ´ne dans une direction donnÃ©e.
 
 BOOL Rotate(short &icon, short direct)
 {
@@ -2718,7 +2718,7 @@ BOOL Rotate(short &icon, short direct)
 	return FALSE;
 }
 
-// Retourne la direction d'une icône.
+// Retourne la direction d'une icÃ´ne.
 
 int GetIconDirect(short icon)
 {

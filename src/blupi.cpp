@@ -23,7 +23,7 @@
 #include "misc.h"
 
 
-// DÈfinitions globales
+// D√©finitions globales
 
 #define NAME			"Blupi"
 #define TITLE			"Blupi"
@@ -31,18 +31,18 @@
 
 // Variables globales
 
-HWND		g_hWnd;					// handle ‡ la fenÍtre
+HWND		g_hWnd;					// handle ≈ï la fenƒôtre
 CEvent*		g_pEvent  = NULL;
 CPixmap*	g_pPixmap = NULL;		// pixmap principal
 CSound*		g_pSound  = NULL;		// sound principal
 CMovie*		g_pMovie  = NULL;		// movie principal
 CDecor*		g_pDecor  = NULL;
-char		g_CDPath[MAX_PATH];		// chemin d'accËs au CD-Rom
+char		g_CDPath[MAX_PATH];		// chemin d'accƒçs au CD-Rom
 BOOL		g_bFullScreen = FALSE;	// FALSE si mode de test
 int			g_speedRate = 1;
 int			g_timerInterval = 50;	// inverval = 50ms
 int			g_mouseType = MOUSETYPEGRA;
-MMRESULT    g_updateTimer;			// timer gÈnÈral
+MMRESULT    g_updateTimer;			// timer g√©n√©ral
 BOOL		g_bActive = TRUE;		// is application active ?
 BOOL		g_bTermInit = FALSE;	// initialisation en cours
 
@@ -51,7 +51,7 @@ UINT		g_lastPhase = 999;
 
 
 
-// Lit un numÈro dÈcimal.
+// Lit un num√©ro d√©cimal.
 
 int GetNum(char *p)
 {
@@ -163,7 +163,7 @@ BOOL ReadConfig(LPSTR lpCmdLine)
 }
 
 
-// Mise ‡ jour principale.
+// Mise ≈ï jour principale.
 
 void UpdateFrame(void)
 {
@@ -172,7 +172,7 @@ void UpdateFrame(void)
 	POINT			posMouse;
 	int				i, term, speed;
 
-	g_pPixmap->MouseBackClear();  // enlËve la souris dans "back"
+	g_pPixmap->MouseBackClear();  // enlƒçve la souris dans "back"
 	posMouse = g_pEvent->GetLastMousePos();
 
 	phase = g_pEvent->GetPhase();
@@ -211,7 +211,7 @@ void UpdateFrame(void)
 		if ( g_pEvent->IsShift() )  // shift en cours ?
 		{
 			g_pEvent->DecorAutoShift(posMouse);
-			g_pDecor->Build(clip, posMouse);  // construit juste le dÈcor
+			g_pDecor->Build(clip, posMouse);  // construit juste le d√©cor
 		}
 		else
 		{
@@ -221,13 +221,13 @@ void UpdateFrame(void)
 				for ( i=0 ; i<speed ; i++ )
 				{
 					g_pDecor->BlupiStep(i==0);  // avance tous les blupi
-					g_pDecor->MoveStep(i==0);   // avance tous les dÈcors
+					g_pDecor->MoveStep(i==0);   // avance tous les d√©cors
 					g_pEvent->DemoStep();       // avance enregistrement/reproduction
 				}
 			}
 
 			g_pEvent->DecorAutoShift(posMouse);
-			g_pDecor->Build(clip, posMouse);  // construit le dÈcor
+			g_pDecor->Build(clip, posMouse);  // construit le d√©cor
 			g_pDecor->NextPhase(1);  // refait la carte de temps en temps
 		}
 	}
@@ -239,13 +239,13 @@ void UpdateFrame(void)
 		clip.right  = POSDRAWX+DIMDRAWX;
 		clip.bottom = POSDRAWY+DIMDRAWY;
 		g_pEvent->DecorAutoShift(posMouse);
-		g_pDecor->Build(clip, posMouse);  // construit le dÈcor
+		g_pDecor->Build(clip, posMouse);  // construit le d√©cor
 		g_pDecor->NextPhase(-1);  // refait la carte chaque fois
 	}
 
 	if ( phase == WM_PHASE_INIT )
 	{
-		g_pEvent->DemoStep();  // dÈmarre Èv. dÈmo automatique
+		g_pEvent->DemoStep();  // d√©marre √©v. d√©mo automatique
 	}
 
 	g_pEvent->DrawButtons();
@@ -258,7 +258,7 @@ void UpdateFrame(void)
 		 phase == WM_PHASE_PLAYMOVIE ||
 		 phase == WM_PHASE_WINMOVIE  )
 	{
-		g_pEvent->MovieToStart();  // fait dÈmarrer un film si nÈcessaire
+		g_pEvent->MovieToStart();  // fait d√©marrer un film si n√©cessaire
 	}
 
 	if ( phase == WM_PHASE_INSERT )
@@ -270,7 +270,7 @@ void UpdateFrame(void)
 	{
 		term = g_pDecor->IsTerminated();
 		if ( term == 1 )  g_pEvent->ChangePhase(WM_PHASE_LOST);  // perdu
-		if ( term == 2 )  g_pEvent->ChangePhase(WM_PHASE_WINMOVIE);   // gagnÈ
+		if ( term == 2 )  g_pEvent->ChangePhase(WM_PHASE_WINMOVIE);   // gagn√©
 	}
 
 	g_pPixmap->MouseBackDraw();  // remet la souris dans "back"
@@ -296,7 +296,7 @@ void Benchmark()
 }
 
 
-// Restitue le jeu aprËs une activation en mode fullScreen.
+// Restitue le jeu aprƒçs une activation en mode fullScreen.
 
 BOOL RestoreGame()
 {
@@ -306,7 +306,7 @@ BOOL RestoreGame()
 	return g_pPixmap->Restore();
 }
 
-// LibËre le jeu avant une dÈsactivation en mode fullScreen.
+// Libƒçre le jeu avant une d√©sactivation en mode fullScreen.
 
 BOOL FlushGame()
 {
@@ -427,7 +427,7 @@ LRESULT CALLBACK WindowProc (HWND hWnd, UINT message,
 				SetWindowText(hWnd, "Blupi");
 				if ( g_pSound != NULL )  g_pSound->RestartMusic();
 			}
-			else		// dÈsactive ?
+			else		// d√©sactive ?
 			{
 				if ( g_bFullScreen )
 				{
@@ -645,7 +645,7 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 		return InitFail("Game not correctly installed", FALSE);
 	}
 
-	// CrÈe le pixmap principal.
+	// Cr√©e le pixmap principal.
 	g_pPixmap = new CPixmap;
 	if ( g_pPixmap == NULL )  return InitFail("New pixmap", TRUE);
 
@@ -780,7 +780,7 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 		return InitFail("Cache bignum.blp", TRUE);
 	g_pPixmap->SetTransparent(CHBIGNUM, RGB(0,0,255));  // bleu
 
-	// CrÈe le gestionnaire de son.
+	// Cr√©e le gestionnaire de son.
 	g_pSound = new CSound;
 	if ( g_pSound == NULL )  return InitFail("New sound", TRUE);
 
@@ -788,20 +788,20 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 	g_pSound->CacheAll();
 	g_pSound->SetState(TRUE);
 
-	// CrÈe le gestionnaire de films.
+	// Cr√©e le gestionnaire de films.
 	g_pMovie = new CMovie;
 	if ( g_pMovie == NULL )  return InitFail("New movie", FALSE);
 
 	g_pMovie->Create();
 
-	// CrÈe le gestionnaire de dÈcors.
+	// Cr√©e le gestionnaire de d√©cors.
 	g_pDecor = new CDecor;
 	if ( g_pDecor == NULL )  return InitFail("New decor", FALSE);
 
 	g_pDecor->Create(g_hWnd, g_pSound, g_pPixmap);
 	g_pDecor->MapInitColors();
 
-	// CrÈe le gestionnaire d'ÈvÈnements.
+	// Cr√©e le gestionnaire d'√©v√©nements.
 	g_pEvent = new CEvent;
 	if ( g_pEvent == NULL )  return InitFail("New event", FALSE);
 
@@ -814,7 +814,7 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 	g_pEvent->ChangePhase(WM_PHASE_TESTCD);
 #endif
 
-	g_bTermInit = TRUE;  // initialisation terminÈe
+	g_bTermInit = TRUE;  // initialisation termin√©e
 	return TRUE;
 }
 

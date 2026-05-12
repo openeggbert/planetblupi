@@ -112,7 +112,7 @@ void CPixmap::SetDebug(BOOL bDebug)
 }
 
 
-// CrÈe l'objet DirectDraw principal.
+// Cr√©e l'objet DirectDraw principal.
 // Retourne FALSE en cas d'erreur.
 
 BOOL CPixmap::Create(HWND hwnd, POINT dim,
@@ -129,7 +129,7 @@ BOOL CPixmap::Create(HWND hwnd, POINT dim,
 
 	if ( m_mouseType == MOUSETYPEGRA )
 	{
-		// Cache dÈfinitivement la vilaine souris Windows.
+		// Cache d√©finitivement la vilaine souris Windows.
 		ShowCursor(FALSE);
 
 		pos = m_mousePos;
@@ -257,7 +257,7 @@ BOOL CPixmap::Create(HWND hwnd, POINT dim,
     return TRUE;
 }
 
-// LibËre les bitmaps.
+// Libƒçre les bitmaps.
 
 BOOL CPixmap::Flush()
 {
@@ -272,7 +272,7 @@ BOOL CPixmap::Restore()
 	return TRUE;
 }
 
-// Initialise la palette systËme.
+// Initialise la palette systƒçme.
 
 BOOL CPixmap::InitSysPalette()
 {
@@ -306,7 +306,7 @@ BOOL CPixmap::IsPalette()
 
 void CPixmap::Fill(RECT rect, COLORREF color)
 {
-	// ‡ faire si nÈcessaire ...
+	// ≈ï faire si n√©cessaire ...
 }
 
 
@@ -475,10 +475,10 @@ BOOL CPixmap::RestorePalette()
 }
 
 // Cherche une couleur dans la palette principale.
-// En mode plein Ècran, il faut chercher dans la palette
+// En mode plein √©cran, il faut chercher dans la palette
 // correspondant aux images (obtenue avec SavePalette),
-// alors qu'en mode fenÍtre, il faut chercher dans la
-// palette systËme (obtenue avec InitSysPalette) !!!
+// alors qu'en mode fenƒôtre, il faut chercher dans la
+// palette systƒçme (obtenue avec InitSysPalette) !!!
 
 int CPixmap::SearchColor(int red, int green, int blue)
 {
@@ -550,7 +550,7 @@ int CPixmap::SearchColor(int red, int green, int blue)
 }
 
 
-// Cache une image contenant des icÙnes.
+// Cache une image contenant des ic√¥nes.
 
 BOOL CPixmap::Cache(int channel, char *pFilename, POINT totalDim, POINT iconDim,
 					BOOL bUsePalette)
@@ -664,7 +664,7 @@ void CPixmap::Flush(int channel)
 	m_lpDDSurface[channel]= NULL;
 }
 
-// DÈfinition de la couleur transparente.
+// D√©finition de la couleur transparente.
 
 void CPixmap::SetTransparent(int channel, COLORREF color)
 {
@@ -676,7 +676,7 @@ void CPixmap::SetTransparent(int channel, COLORREF color)
 	m_colorSurface[2*channel+1] = color;
 }
 
-// DÈfinition de la couleur transparente.
+// D√©finition de la couleur transparente.
 
 void CPixmap::SetTransparent2(int channel, COLORREF color1, COLORREF color2)
 {
@@ -689,14 +689,14 @@ void CPixmap::SetTransparent2(int channel, COLORREF color1, COLORREF color2)
 }
 
 
-// Modifie la rÈgion de clipping.
+// Modifie la r√©gion de clipping.
 
 void CPixmap::SetClipping(RECT clip)
 {
 	m_clipRect = clip;
 }
 
-// Retourne la rÈgion de clipping.
+// Retourne la r√©gion de clipping.
 
 RECT CPixmap::GetClipping()
 {
@@ -704,7 +704,7 @@ RECT CPixmap::GetClipping()
 }
 
 
-// Teste si un point fait partie d'une icÙne.
+// Teste si un point fait partie d'une ic√¥ne.
 
 BOOL CPixmap::IsIconPixel(int channel, int rank, POINT pos)
 {
@@ -861,7 +861,7 @@ BOOL CPixmap::DrawIconPart(int chDst, int channel, int rank, POINT pos,
 	return TRUE;
 }
 
-// Dessine une partie d'image n'importe o˘.
+// Dessine une partie d'image n'importe o≈Ø.
 // Les modes sont 0=transparent, 1=opaque.
 
 BOOL CPixmap::DrawPart(int chDst, int channel, POINT dest, RECT rect,
@@ -911,7 +911,7 @@ BOOL CPixmap::DrawImage(int chDst, int channel, RECT rect, int mode)
 }
 
 
-// Construit une icÙne en utilisant un masque.
+// Construit une ic√¥ne en utilisant un masque.
 
 BOOL CPixmap::BuildIconMask(int channelMask, int rankMask,
 							int channel, int rankSrc, int rankDst)
@@ -961,7 +961,7 @@ BOOL CPixmap::BuildIconMask(int channelMask, int rankMask,
 }
 
 
-// Affiche le pixmap ‡ l'Ècran.
+// Affiche le pixmap ≈ï l'√©cran.
 // Retourne FALSE en cas d'erreur.
 
 BOOL CPixmap::Display()
@@ -1054,7 +1054,7 @@ void CPixmap::MouseShow(BOOL bShow)
 	m_bMouseShow = bShow;
 }
 
-// Met ‡ jour le dessin de la souris.
+// Met ≈ï jour le dessin de la souris.
 
 void CPixmap::MouseUpdate()
 {
@@ -1075,7 +1075,7 @@ void CPixmap::MouseUpdate()
 	newRect.right  = newRect.left + DIMBLUPIX;
 	newRect.bottom = newRect.top  + DIMBLUPIY;
 
-	MouseBackRestore();  // enlËve la souris dans m_lpDDSBack
+	MouseBackRestore();  // enlƒçve la souris dans m_lpDDSBack
 	MouseBackDraw();     // dessine la souris dans m_lpDDSBack
 
 	if ( m_bBackDisplayed )
@@ -1093,9 +1093,9 @@ void CPixmap::MouseUpdate()
 	}
 }
 
-// Dessine rapidement la souris dans l'Ècran.
+// Dessine rapidement la souris dans l'√©cran.
 // Il s'agit en fait de dessiner un petit morceau rectangulaire
-// de m_lpDDSBack dans l'Ècran.
+// de m_lpDDSBack dans l'√©cran.
 
 BOOL CPixmap::MouseQuickDraw(RECT rect)
 {
@@ -1136,12 +1136,12 @@ void CPixmap::MouseInvalidate()
 	m_bMouseBack = FALSE;
 }
 
-// EnlËve la souris dans m_lpDDSBack.
+// Enlƒçve la souris dans m_lpDDSBack.
 
 void CPixmap::MouseBackClear()
 {
 	if ( m_mouseType != MOUSETYPEGRA )  return;
-	MouseBackRestore();  // enlËve la souris dans m_lpDDSBack
+	MouseBackRestore();  // enlƒçve la souris dans m_lpDDSBack
 }
 
 // Dessine la souris dans m_lpDDSBack.

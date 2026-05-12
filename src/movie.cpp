@@ -247,7 +247,7 @@ BOOL CMovie::Create()
 #endif
 }
 
-// Retourne l'état de DirectMovie.
+// Retourne l'Ã©tat de DirectMovie.
 
 BOOL CMovie::GetEnable()
 {
