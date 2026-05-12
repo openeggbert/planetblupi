@@ -4,9 +4,9 @@
 
 #include <Windows.h>
 
-#include "DEF.H"
-#include "SOUND.H"
-#include "PIXMAP.H"
+#include "def.h"
+#include "sound.h"
+#include "pixmap.h"
 
 /////////////////////////////////////////////////////////////////////////////
 

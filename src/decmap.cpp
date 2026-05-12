@@ -1,8 +1,8 @@
 // DecMap.cpp
 //
 
-#include "DEF.H"
-#include "DECOR.H"
+#include "def.h"
+#include "decor.h"
 
 #define MAP_CADRE	1
 #define MAP_FOG		2

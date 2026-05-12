@@ -1,7 +1,7 @@
 // tableobj.cpp
 //
 
-#include "DEF.H"
+#include "def.h"
 
 static int tableObject[MAXCELY][MAXCELX] =
 {

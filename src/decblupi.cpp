@@ -1,11 +1,11 @@
 // DecBlupi.cpp
 //
 
-#include "DEF.H"
-#include "DECOR.H"
-#include "ACTION.H"
-#include "MISC.H"
-#include "RESOURCE.H"
+#include "def.h"
+#include "decor.h"
+#include "action.h"
+#include "misc.h"
+#include "resource.h"
 #include "decgoal.h"
 
 // Cette table donne l'action ŕ effectuer pour un bouton

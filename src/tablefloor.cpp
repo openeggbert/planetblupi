@@ -1,7 +1,7 @@
 // tablefloor.cpp
 //
 
-#include "DEF.H"
+#include "def.h"
 
 static int tableFloor[MAXCELY][MAXCELX] =
 {

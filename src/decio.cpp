@@ -2,9 +2,9 @@
 //
 
 #include <Windows.h>
-#include "DEF.H"
-#include "DECOR.H"
-#include "MISC.H"
+#include "def.h"
+#include "decor.h"
+#include "misc.h"
 
 typedef struct
 {
