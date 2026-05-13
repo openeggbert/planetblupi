@@ -1,0 +1,10 @@
+# Android local configuration — never commit these
+local.properties
+key.properties
+*.keystore
+*.jks
+
+# Gradle build output
+.gradle/
+build/
+app/build/

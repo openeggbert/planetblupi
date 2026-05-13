@@ -18,7 +18,12 @@ function(configure_vendored_sdl)
                 "Run: git submodule update --init --recursive")
         endif()
     endforeach()
-    if(EMSCRIPTEN)
+    if(ANDROID)
+        # Android requires libSDL3.so to be packaged inside the APK so the
+        # Java SDL activity can load it via System.loadLibrary("SDL3").
+        set(SDL_SHARED ON  CACHE BOOL "Build SDL as shared" FORCE)
+        set(SDL_STATIC OFF CACHE BOOL "Build SDL as static" FORCE)
+    elseif(EMSCRIPTEN)
         # Emscripten requires static linking; shared libraries are not supported.
         set(SDL_SHARED OFF CACHE BOOL "Build SDL as shared" FORCE)
         set(SDL_STATIC ON  CACHE BOOL "Build SDL as static" FORCE)

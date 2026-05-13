@@ -6,6 +6,10 @@
 #if defined(__EMSCRIPTEN__)
 #include <emscripten/emscripten.h>
 #endif
+#if defined(__ANDROID__)
+#include <SDL3/SDL.h>
+#include <cerrno>
+#endif
 
 #include <windows.h>
 #include <windowsx.h>
@@ -80,10 +84,24 @@ BOOL ReadConfig(LPSTR lpCmdLine)
 	int			nb;
 
 	file = fopen("data/config.def", "rb");
+#if defined(__ANDROID__)
+	if ( file == NULL ) {
+		SDL_Log("FREEAPI_ANDROID: ReadConfig fopen(data/config.def) FAILED errno=%d", errno);
+		return FALSE;
+	}
+	fseek(file, 0, SEEK_END);
+	long fileSize = ftell(file);
+	fseek(file, 0, SEEK_SET);
+	SDL_Log("FREEAPI_ANDROID: ReadConfig fopen(data/config.def) OK size=%ld", fileSize);
+#else
 	if ( file == NULL )  return FALSE;
+#endif
 	nb = fread(buffer, sizeof(char), 200-1, file);
 	buffer[nb] = 0;
 	fclose(file);
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: ReadConfig read %d bytes: [%.80s]", nb, buffer);
+#endif
 
 #if 0
 	pText = strstr(buffer, "CD-Rom=");
@@ -577,7 +595,13 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 	RECT			rcRect;
 	BOOL			bOK;
 
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: DoInit entered");
+#endif
 	bOK = ReadConfig(lpCmdLine);  // lit le fichier config.def
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: DoInit ReadConfig returned %d", (int)bOK);
+#endif
 
 	InitHInstance(hInstance);
 
@@ -640,7 +664,15 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 						NULL
 					);
 	}
-	if ( !g_hWnd )  return FALSE;
+	if ( !g_hWnd )  {
+#if defined(__ANDROID__)
+		SDL_Log("FREEAPI_ANDROID: DoInit CreateWindow returned NULL, failing");
+#endif
+		return FALSE;
+	}
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: DoInit window created g_hWnd=%p", (void*)g_hWnd);
+#endif
 
 	ShowWindow(g_hWnd, nCmdShow);
 	UpdateWindow(g_hWnd);
@@ -650,6 +682,9 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 
 	if ( !bOK )  // config.def pas correct ?
 	{
+#if defined(__ANDROID__)
+		SDL_Log("FREEAPI_ANDROID: DoInit config.def not correct (bOK=FALSE), calling InitFail");
+#endif
 		return InitFail("Game not correctly installed", FALSE);
 	}
 
@@ -659,8 +694,19 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 
 	totalDim.x = LXIMAGE;
 	totalDim.y = LYIMAGE;
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: DoInit calling g_pPixmap->Create fullscreen=%d mouseType=%d", (int)g_bFullScreen, g_mouseType);
+#endif
 	if ( !g_pPixmap->Create(g_hWnd, totalDim, g_bFullScreen, g_mouseType) )
+	{
+#if defined(__ANDROID__)
+		SDL_Log("FREEAPI_ANDROID: DoInit g_pPixmap->Create FAILED");
+#endif
 		return InitFail("Create pixmap", TRUE);
+	}
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: DoInit g_pPixmap->Create succeeded");
+#endif
 
 	OutputDebug("Image: init\n");
 	totalDim.x = LXIMAGE;
@@ -823,6 +869,9 @@ static BOOL DoInit(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 #endif
 
 	g_bTermInit = TRUE;  // initialisation terminée
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: DoInit completed successfully");
+#endif
 	return TRUE;
 }
 
@@ -834,11 +883,20 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 {
 	MSG		msg;
 
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: WinMain entered");
+#endif
 	if ( !DoInit(hInstance, lpCmdLine, nCmdShow) )
 	{
+#if defined(__ANDROID__)
+		SDL_Log("FREEAPI_ANDROID: WinMain DoInit failed, returning FALSE");
+#endif
 		return FALSE;
 	}
 
+#if defined(__ANDROID__)
+	SDL_Log("FREEAPI_ANDROID: WinMain DoInit succeeded, entering message loop");
+#endif
 	SetTimer(g_hWnd, 1, g_timerInterval, NULL);
 
 	while ( TRUE )
