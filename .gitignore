@@ -249,3 +249,4 @@ cmake-build-debug/*
 # Emscripten
 cmake-build-web/
 
+android/app/.cxx/*
