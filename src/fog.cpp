@@ -1,5 +1,22 @@
 // Fog.cpp
 
+/**
+ * @file fog.cpp
+ * @brief Fog-of-war bit-map encoding and decoding helpers.
+ *
+ * Each world cell can be partially or fully covered by fog.  The fog sprite
+ * for a cell is selected from 15 possible patterns depending on which of the
+ * four quarter-cell quadrants (top-left, top-right, bottom-left, bottom-right)
+ * are obscured.  This module converts between the compact 4-bit quadrant mask
+ * and the icon index stored in Cellule::fog.
+ *
+ * Internal functions (not exposed in any header):
+ *  - GetFogBits()  — decode an icon index into 4 quadrant flags
+ *  - GetFogIcon()  — encode 4 quadrant flags back to an icon index
+ *
+ * These are called exclusively by CDecor::GetSeeBits() / CDecor::GetSeeIcon().
+ */
+
 #include <Windows.h>
 
 #include "decor.h"

@@ -1,3 +1,10 @@
+/**
+ * @file fifo.h
+ * @brief Priority-sorted stack (open-list) used by the A* pathfinder.
+ *
+ * CPileTriee is a min-heap ordered by distance that lets the pathfinding
+ * algorithm in chemin.cpp efficiently retrieve the closest unvisited cell.
+ */
 
 #pragma once
 
