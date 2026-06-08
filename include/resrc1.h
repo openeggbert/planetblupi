@@ -1,3 +1,11 @@
+/**
+ * @file resrc1.h
+ * @brief Minimal resource ID subset for the eGames edition of Planet Blupi.
+ *
+ * Contains only the TX_DIRECT_* direction string IDs that differ between
+ * the standard and eGames builds.  All other IDs are shared with resource.h.
+ */
+
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
 // Used by Blupi-e.rc

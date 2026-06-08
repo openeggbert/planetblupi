@@ -1,6 +1,18 @@
 // tableobj.cpp
 //
 
+/**
+ * @file tableobj.cpp
+ * @brief Default object (terrain decoration) layout for the world editor.
+ *
+ * tableObject is a 200×200 (MAXCELY × MAXCELX) grid of object icon indices
+ * used to initialise a new world in the level editor.  Most cells default to
+ * -1 (no object).  Non-negative values are indices into the CHOBJECT /
+ * CHOBJECTo image channels (image/obj*.blp).
+ *
+ * The GetTableObject() function exposes the table to CDecor::Init().
+ */
+
 #include "def.h"
 
 static int tableObject[MAXCELY][MAXCELX] =

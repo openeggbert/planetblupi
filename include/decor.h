@@ -1,5 +1,28 @@
 // Decor.h
 
+/**
+ * @file decor.h
+ * @brief CDecor — the central game-world manager for Planet Blupi.
+ *
+ * Declares the main @ref CDecor class together with the data structures it
+ * owns:
+ *  - @ref Cellule  — one tile of the 200×200 world grid (floor + object + fog)
+ *  - @ref Blupi    — a single animated character (player, enemy or disciple)
+ *  - @ref Move     — an animated decoration element (fire, bridge push, etc.)
+ *
+ * CDecor coordinates all in-game subsystems that are split across several
+ * translation units:
+ *  - **Arrange**   (arrange.cpp)  – auto-tiling, flood-fill placement
+ *  - **Obstacle**  (obstacle.cpp) – passability checks and pathfinding helpers
+ *  - **DecBlupi**  (decblupi.cpp) – character lifecycle, goals and rendering
+ *  - **DecMove**   (decmove.cpp)  – animated decoration steps and fire spread
+ *  - **DecIO**     (decio.cpp)    – save/load world files (.blp)
+ *  - **DecMap**    (decmap.cpp)   – minimap generation
+ *  - **DecStat**   (decstat.cpp)  – on-screen statistics panel
+ *  - **Chemin**    (chemin.cpp)   – A* pathfinding (CPileTriee-based)
+ *  - **Decor**     (decor.cpp)    – rendering, coordinate helpers, misc
+ */
+
 #pragma once
 
 #include <Windows.h>
@@ -23,26 +46,54 @@
 #define ICON_HILI_ERR	119
 
 // Descripteur d'une cellule du décor.
+/**
+ * @brief One tile in the world grid.
+ *
+ * Kept intentionally small; the world is a 100×100 array of these
+ * (MAXCELX/2 × MAXCELY/2 = 10 000 elements).  Each tile has an optional
+ * floor layer and an optional object layer.
+ */
 typedef struct
 {
-	short	floorChannel;
-	short	floorIcon;
-	short	objectChannel;
-	short	objectIcon;
-	short	fog;			// brouillard
-	short	rankMove;		// rang dans m_move
-	short	workBlupi;		// rang du blupi travaillant ici
-	short	fire;
+	short	floorChannel;  ///< Image channel index for the floor sprite (CHFLOOR etc.)
+	short	floorIcon;     ///< Sprite index within the floor channel
+	short	objectChannel; ///< Image channel index for the object sprite
+	short	objectIcon;    ///< Sprite index within the object channel
+	short	fog;           // brouillard
+	short	rankMove;      // rang dans m_move
+	short	workBlupi;     // rang du blupi travaillant ici
+	short	fire;          ///< Fire intensity counter (0 = no fire)
 }
 Cellule;
 // Cette structure doit ętre la plus petite possible, car
 // il en existe un tableau de 100x100 = 10'000 cellules !
 
 // Descripteur d'un blupi animé.
-#define MAXBLUPI	100
-#define MAXUSED		50
-#define MAXLIST		10
+#define MAXBLUPI	100  ///< Maximum number of simultaneous characters (Blupi + all enemies)
+#define MAXUSED		50   ///< Maximum number of already-visited cells remembered per character
+#define MAXLIST		10   ///< Maximum number of queued action commands per character
 
+/**
+ * @brief Descriptor for one animated character (Blupi, spider, virus, robot, …).
+ *
+ * The engine holds up to MAXBLUPI of these in CDecor::m_blupi[].
+ * @c perso identifies the character type:
+ *  - 0 = Blupi (player)
+ *  - 1 = Spider
+ *  - 2 = Virus
+ *  - 3 = Tracks (tank)
+ *  - 4 = Robot
+ *  - 5 = Bomb
+ *  - 6 = Mine detonator (invisible)
+ *  - 7 = Electro
+ *  - 8 = Disciple (robot2)
+ *
+ * @c vehicule identifies the vehicle Blupi is currently using:
+ *  - 0 = on foot
+ *  - 1 = in a boat
+ *  - 2 = in a jeep
+ *  - 3 = in armour
+ */
 typedef struct
 {
 	BOOL	bExist;			// TRUE -> utilisé
@@ -128,37 +179,51 @@ Blupi;
 
 
 // Descripteur d'un décor animé.
-#define MAXMOVE		100
-#define MOVEICONNB	1000
+#define MAXMOVE		100    ///< Maximum number of simultaneous animated decoration elements
+#define MOVEICONNB	1000   ///< Maximum entries in the global icon animation table
 
+/**
+ * @brief Descriptor for one animated decoration element.
+ *
+ * Used to animate floor or object tiles independently of characters —
+ * e.g., fire spreading, a bridge being pushed, or a building being
+ * constructed step by step.  Up to MAXMOVE of these exist in
+ * CDecor::m_move[].
+ */
 typedef struct
 {
-	BOOL	bExist;			// TRUE -> utilisé
-
-	POINT	cel;			// cellule du décor
-	short	rankBlupi;		// blupi travaillant ici
-
-	BOOL	bFloor;			// TRUE -> floor, FALSE -> object
-	short	channel;
-	short	icon;
-	short	maskChannel;
-	short	maskIcon;
-	short	phase;			// phase pour pMoves ou pIcon
-	short	rankMoves;		// *nb,dx,dy,...
-	short	rankIcons;		// *nb,i,i,...
-
-	short	total;			// nb total d'étapes
-	short	delai;			// délai entre deux pas
-	short	stepY;			// pas vertical *100
-
-	short	cTotal;
-	short	cDelai;
+	BOOL	bExist;       ///< TRUE when this slot is in use
+	POINT	cel;          ///< World-grid cell position of the decoration
+	short	rankBlupi;    ///< Index of the Blupi driving this animation (-1 = autonomous)
+	BOOL	bFloor;       ///< TRUE = floor layer, FALSE = object layer
+	short	channel;      ///< Destination image channel
+	short	icon;         ///< Current icon index
+	short	maskChannel;  ///< Mask image channel (0 = none)
+	short	maskIcon;     ///< Mask icon index
+	short	phase;        // phase pour pMoves ou pIcon
+	short	rankMoves;    // *nb,dx,dy,...
+	short	rankIcons;    // *nb,i,i,...
+	short	total;        // nb total d'étapes
+	short	delai;        // délai entre deux pas
+	short	stepY;        ///< Vertical step increment × 100 for bounce effects
+	short	cTotal;       ///< Current step counter (counts down from total)
+	short	cDelai;       ///< Current delay counter
 }
 Move;
 
 
-#define MAXLASTDRAPEAU	50
+#define MAXLASTDRAPEAU	50  ///< Maximum number of flag positions kept in history
 
+/**
+ * @brief Central game-world manager.
+ *
+ * CDecor owns the entire game state: the tile grid, all characters
+ * (Blupi + enemies), animated decorations, win conditions, fog-of-war,
+ * minimap data, statistics, pathfinding workspace and the undo buffer.
+ *
+ * Its public interface is split across several translation units
+ * (see @ref decor.h for details).
+ */
 class CDecor
 {
 public:

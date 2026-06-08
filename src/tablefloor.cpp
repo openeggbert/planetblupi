@@ -1,6 +1,20 @@
 // tablefloor.cpp
 //
 
+/**
+ * @file tablefloor.cpp
+ * @brief Default floor (terrain) layout for the world editor's blank canvas.
+ *
+ * tableFloor is a 200×200 (MAXCELY × MAXCELX) grid of floor icon indices
+ * used to initialise a new world in the level editor.  Most cells default to
+ * icon 13 (transparent / empty), with the navigable area (icons 0–12)
+ * forming the "world 0" tutorial island shape.
+ *
+ * Floor icon indices map to sprite frames within the CHFLOOR image channels
+ * (image/floor000.blp … floor003.blp).  The GetTableFloor() function (defined
+ * at the end of this file) exposes the table to CDecor::Init().
+ */
+
 #include "def.h"
 
 static int tableFloor[MAXCELY][MAXCELX] =

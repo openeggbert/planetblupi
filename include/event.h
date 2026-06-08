@@ -1,109 +1,204 @@
 // Event.h
 
-
+/**
+ * @file event.h
+ * @brief CEvent — top-level input and game-phase manager for Planet Blupi.
+ *
+ * CEvent owns the button strip, the two HUD gauges, the popup menu, phase
+ * transitions, demo recording/playback, and the main WM_* message router.
+ *
+ * Supporting data structures:
+ *  - @ref Button     — static descriptor for one toolbar button slot
+ *  - @ref Phase      — static descriptor for one game phase (screen)
+ *  - @ref DemoHeader — binary header of a recorded demo file
+ *  - @ref DemoEvent  — one timestamped input event in a demo file
+ */
 
 /////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief Static descriptor for one toolbar button slot.
+ *
+ * These descriptors are compiled into event.cpp's phase table and are
+ * read-only after startup.
+ */
 typedef struct
 {
-	UINT	message;
-	int		type;
-	int		iconMenu[20];
-	int		x, y;
-	int		toolTips[20];
+	UINT	message;       ///< WM_* message posted when the button fires
+	int		type;          ///< Visual type index within the CHBUTTON sprite sheet
+	int		iconMenu[20];  ///< Sub-menu icon indices (up to 20)
+	int		x, y;          ///< Top-left pixel position on screen
+	int		toolTips[20];  ///< Tooltip string resource IDs (TX_*)
 }
 Button;
 
+/**
+ * @brief Static descriptor for one game phase (screen / mode).
+ *
+ * Phases correspond to the WM_PHASE_* messages.  Each phase defines the
+ * background image name, CD-ROM requirement flag, and the set of toolbar
+ * buttons that are active during that phase.
+ */
 typedef struct
 {
-	UINT	phase;
-	char	backName[20];
-	BOOL	bCDrom;
-	Button	buttons[MAXBUTTON];
+	UINT	phase;              ///< WM_PHASE_* identifier
+	char	backName[20];       ///< Filename stem of the background BLP image
+	BOOL	bCDrom;             ///< TRUE if the phase requires the CD-ROM
+	Button	buttons[MAXBUTTON]; ///< Toolbar button layout for this phase
 }
 Phase;
 
 
+/**
+ * @brief Binary header at the start of a .rec demo recording file.
+ */
 typedef struct
 {
-	short	majRev;
-	short	minRev;
-	short	bSchool;
-	short	bPrivate;
-	short	world;
-	short	skill;
+	short	majRev;    ///< Major version of the engine that recorded the demo
+	short	minRev;    ///< Minor version
+	short	bSchool;   ///< TRUE if recorded in school (tutorial) mode
+	short	bPrivate;  ///< TRUE if recorded in private (map-editor) mode
+	short	world;     ///< World number that was played
+	short	skill;     ///< Skill level (0 = easy, 1 = normal, 2 = hard)
 	short	reserve1[99];
 }
 DemoHeader;
 
+/**
+ * @brief One timestamped input event stored in a demo recording.
+ */
 typedef struct
 {
-	int		time;
-	UINT	message;
-	WPARAM	wParam;
-	LPARAM	lParam;
+	int		time;     ///< Relative time in game ticks when the event occurred
+	UINT	message;  ///< Windows message type (WM_LBUTTONDOWN, WM_MOUSEMOVE, …)
+	WPARAM	wParam;   ///< Message wParam
+	LPARAM	lParam;   ///< Message lParam (encodes mouse position for mouse events)
 }
 DemoEvent;
 
 
+/**
+ * @brief Top-level input router and game-phase controller.
+ *
+ * One global CEvent instance drives the entire game loop:
+ *  - Maintains the current WM_PHASE_* phase and switches between screens
+ *  - Routes WM_* messages to the appropriate subsystem (CDecor, CButton, CMenu …)
+ *  - Manages demo recording / playback
+ *  - Owns the toolbar buttons (CButton[MAXBUTTON]), gauges (CJauge[2])
+ *    and the popup action menu (CMenu)
+ */
 class CEvent
 {
 public:
 	CEvent();
 	~CEvent();
 
+	/** @brief Return the last known mouse position in screen pixels. */
 	POINT	GetMousePos();
+	/** @brief Bind the event manager to all game subsystems. */
 	void	Create(HWND hWnd, CPixmap *pPixmap, CDecor *pDecor, CSound *pSound, CMovie *pMovie);
+	/** @brief Notify the event manager of a full-screen mode change. */
 	void	SetFullScreen(BOOL bFullScreen);
+	/** @brief Select the mouse cursor behaviour (MOUSETYPE* constant). */
 	void	SetMouseType(int mouseType);
+	/** @brief Return the current game world index (may differ from physical/image). */
 	int		GetWorld();
+	/** @brief Return the world number as stored on disk. */
 	int		GetPhysicalWorld();
+	/** @brief Return the world number used to select background images. */
 	int		GetImageWorld();
+	/** @brief Return TRUE when the in-game help overlay is hidden. */
 	BOOL	IsHelpHide();
+	/**
+	 * @brief Switch to a new game phase (screen).
+	 * @param phase WM_PHASE_* identifier
+	 * @return TRUE on success
+	 */
 	BOOL	ChangePhase(UINT phase);
+	/** @brief Queue a movie to start once the current phase finishes. */
 	void	MovieToStart();
+	/** @brief Return the current WM_PHASE_* identifier. */
 	UINT	GetPhase();
+	/** @brief Try to show the CD-ROM insert prompt. */
 	void	TryInsert();
+	/** @brief Restore the last saved game from disk. */
 	void	RestoreGame();
 
+	/** @brief Return the slot index of toolbar button @p button (BUTTON_*). */
 	int		GetButtonIndex(int button);
+	/** @brief Return the state of toolbar button @p button. */
 	int		GetState(int button);
+	/** @brief Set the state of toolbar button @p button. */
 	void	SetState(int button, int state);
+	/** @brief Return TRUE when toolbar button @p button is interactive. */
 	BOOL	GetEnable(int button);
+	/** @brief Enable/disable toolbar button @p button. */
 	void	SetEnable(int button, BOOL bEnable);
+	/** @brief Return TRUE when toolbar button @p button is hidden. */
 	BOOL	GetHide(int button);
+	/** @brief Show/hide toolbar button @p button. */
 	void	SetHide(int button, BOOL bHide);
+	/** @brief Return the selected sub-menu index of toolbar button @p button. */
 	int		GetMenu(int button);
+	/** @brief Set the selected sub-menu index of toolbar button @p button. */
 	void	SetMenu(int button, int menu);
 
+	/** @brief Draw all dirty toolbar buttons; return TRUE if anything changed. */
 	BOOL	DrawButtons();
+	/**
+	 * @brief Return the SPRITE_* cursor for the given screen position.
+	 * Used to show directional scroll arrows near the viewport edges.
+	 */
 	int		MousePosToSprite(POINT pos);
+	/** @brief Update the cursor sprite for the current @p pos. */
 	void	MouseSprite(POINT pos);
+	/** @brief Show the "busy" (wait) cursor overlay. */
 	void	WaitMouse(BOOL bWait);
+	/** @brief Temporarily hide the cursor (e.g. during full-screen transitions). */
 	void	HideMouse(BOOL bHide);
+	/** @brief Return the mouse position from the previous frame. */
 	POINT	GetLastMousePos();
+	/**
+	 * @brief Primary message handler — dispatches to the active phase.
+	 * @return TRUE if the message was fully consumed
+	 */
 	BOOL	TreatEvent(UINT message, WPARAM wParam, LPARAM lParam);
+	/** @brief Handle messages common to all phases (quit, resize, etc.). */
 	BOOL	TreatEventBase(UINT message, WPARAM wParam, LPARAM lParam);
 
+	/** @brief Auto-scroll the world view when @p pos is near the viewport edge. */
 	void	DecorAutoShift(POINT pos);
-	
+
+	/** @brief Start AVI playback via CMovie. */
 	BOOL	StartMovie(char *pFilename);
+	/** @brief Stop the current AVI movie. */
 	void	StopMovie();
+	/** @brief Return TRUE while an AVI movie is playing. */
 	BOOL	IsMovie();
 
+	/** @brief Advance animated objects on the current frame (called by WM_TIMER). */
 	BOOL	FlipObject();
 
+	/** @brief Load a saved game slot identified by @p message (WM_READ*). */
 	void	Read(int message);
+	/** @brief Save the current game to slot identified by @p message (WM_WRITE*). */
 	void	Write(int message);
 
+	/** @brief Set the game speed multiplier (1 = normal). */
 	void	SetSpeed(int speed);
+	/** @brief Return the current speed multiplier. */
 	int		GetSpeed();
+	/** @brief Return TRUE when the game is paused. */
 	BOOL	GetPause();
+	/** @brief Return TRUE when the Shift key is held. */
 	BOOL	IsShift();
 
+	/** @brief Advance the demo playback by one tick. */
 	void	DemoStep();
+	/** @brief Display a single debug character on-screen. */
 	void	DebugDisplay(char m);
 
+	/** @brief Advance the intro animation sequence by one frame. */
 	void	IntroStep();
 
 protected:

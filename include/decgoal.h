@@ -1,4 +1,19 @@
 
+/**
+ * @file decgoal.h
+ * @brief GOAL_* opcode table for the Blupi goal / task interpreter.
+ *
+ * Goals are high-level multi-step missions assigned to characters
+ * (e.g. "build a hut", "cut a tree", "travel to cell X").
+ * Each goal is encoded as a variable-length sequence of GOAL_* opcodes
+ * stored in static tables.  CDecor::GoalNextOp() steps through them one
+ * opcode at a time.
+ *
+ * Opcode parameter counts are given in the trailing comments using the
+ * notation "dx,dy" for relative cell offsets, "channel,icon" for sprite
+ * references, etc.
+ */
+
 #pragma once
 
 // Méta opérations (goal).
@@ -54,5 +69,12 @@
 #define GOAL_ACTUALISE		48	//
 #define GOAL_WAITFREE		49	// dx,dy
 
+/**
+ * @brief Return the opcode table for a given goal @p action.
+ * @param action High-level action index (WM_ACTION_* minus WM_USER)
+ * @return Pointer to the first opcode in the table, terminated by GOAL_TERM
+ */
 short* GetTableGoal (int action);
+
+/** @brief Lookup table: number of operands for each GOAL_* opcode. */
 extern short table_goal_nbop[];

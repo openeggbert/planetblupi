@@ -1,6 +1,23 @@
 // Def.h
 //
 
+/**
+ * @file def.h
+ * @brief Global constants, action codes, sound indices and Windows message IDs for Planet Blupi.
+ *
+ * Centralises every compile-time constant used across the engine:
+ *  - Rendering dimensions (window, drawing surface, minimap, cells, objects, sprites)
+ *  - Image-channel indices (CHBACK … CHBIGNUM) consumed by CPixmap
+ *  - Eight-direction movement codes (DIRECT_*)
+ *  - Blupi and enemy animation action codes (ACTION_*)
+ *  - Sound-effect indices (SOUND_*) for all in-game audio events
+ *  - Toolbar button identifiers (BUTTON_*)
+ *  - Error codes (ERROR_*)
+ *  - Mouse cursor sprite identifiers (SPRITE_*)
+ *  - Windows user messages (WM_*) for phase transitions, button events and I/O
+ *  - The @ref Term win-condition structure
+ */
+
 #pragma once
 
 #include <Windows.h>
@@ -599,6 +616,13 @@
 
 // Conditions pour gagner.
 
+/**
+ * @brief Win-condition descriptor stored in each mission world file.
+ *
+ * All fields are short flags or counts.  A zero value means the condition is
+ * not required.  Every non-zero condition must be satisfied simultaneously
+ * before CDecor::IsTerminated() returns a victory code.
+ */
 typedef struct
 {
 	short	bHachBlupi;		// blupi sur dalle hachurée
