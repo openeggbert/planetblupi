@@ -10,6 +10,9 @@
 #include <SDL3/SDL.h>
 #include <cerrno>
 #endif
+#ifdef FREEDIRECT
+#define PLANET_BLUPI_IDLE_THROTTLE TRUE
+#endif
 
 #include <windows.h>
 #include <windowsx.h>
@@ -36,6 +39,18 @@
 #define NAME			"Blupi"
 #define TITLE			"Blupi"
 
+// Opt-in idle-loop CPU throttle for WinMain's message pump. FALSE (default)
+// preserves the original DirectX3/WinAPI EXE's exact busy-spin behavior,
+// unchanged. Measured on the sibling free-eggbert port (identical WinMain
+// loop): the original .exe uses ~98% CPU on Windows XP (VirtualBox, single
+// vCPU) and ~7% under Wine on Linux; the FREEDIRECT port uses ~6.3% on the
+// same Linux host -- all three are the same original spin, just different
+// core counts, not a free-direct/free-api regression. Define as TRUE (or
+// pass -DPLANET_BLUPI_IDLE_THROTTLE=1 at compile time) to cap CPU usage
+// while the window is active and idle (see WinMain).
+#ifndef PLANET_BLUPI_IDLE_THROTTLE
+#define PLANET_BLUPI_IDLE_THROTTLE FALSE
+#endif
 
 // Variables globales
 
@@ -916,7 +931,22 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			emscripten_sleep(0);
 #else
 			// make sure we go to sleep if we have nothing else to do
-			if ( !g_bActive )  WaitMessage();
+			if ( !g_bActive )
+			{
+				WaitMessage();
+			}
+#if PLANET_BLUPI_IDLE_THROTTLE
+			else
+			{
+				// Opt-in: PeekMessage has already confirmed nothing is
+				// pending -- sleeping here only caps how often we re-check,
+				// it never delays dispatch of a real message (PeekMessage/
+				// GetMessage themselves are never delayed). Original
+				// behavior is an unthrottled spin here; see the
+				// PLANET_BLUPI_IDLE_THROTTLE comment above.
+				Sleep(1);
+			}
+#endif
 #endif
 		}
 	}
