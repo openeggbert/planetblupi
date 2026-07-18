@@ -26,6 +26,7 @@
 #define _INTRO			FALSE	// TRUE si images d'introduction
 #define _EGAMES			FALSE	// TRUE version pour eGames
 #define _SE				FALSE	// TRUE eGames Special Edition
+#define _LEGACY			FALSE	// if TRUE, keep broken/quirky legacy code
 
 
 #define LXIMAGE			640		// dimensions de la fenętre de jeu
